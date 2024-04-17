@@ -50,6 +50,15 @@ class Character extends MovableObject {
                 this.otherDirection = true;
                 this.walkking_sound.play();
             }
+
+            if (this.world.keyboard.UP) {
+                if (!this.isAboveGround()) {
+                    this.speedY = 30;
+                    this.y -= this.speedY;
+                    this.speedY -= this.acceleration;
+                }
+            }
+
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
