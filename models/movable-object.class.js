@@ -54,18 +54,23 @@ class MovableObject {
         }
     }
 
-    isColliding(mo){
-        return this.x + this.width > mo.x && 
-        this.y + this.height > mo.y &&
-        this.x < mo.x &&
-        this.y < mo.y + mo.height
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height
     }
 
-
-    checkIfDead(){
-        if(this.energy <= 0){
-            console.log('is dead')
+    hit() {
+        this.energy -= 5;
+        if (this.energy < 0) {
+            this.energy = 0;
         }
+        console.log(this.energy)
+    }
+
+    isDead(){
+        return this.energy == 0;
     }
 
     loadImages(array) {
