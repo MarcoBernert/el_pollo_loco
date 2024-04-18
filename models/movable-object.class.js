@@ -10,6 +10,7 @@ class MovableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
+    energy = 100;
 
     applyGravity() {
         setInterval(() => {
@@ -28,8 +29,8 @@ class MovableObject {
         this.img = new Image();
         this.img.src = path;
     }
-    
-    
+
+
     flipImage(mo, ctx) {
         ctx.save();
         ctx.scale(-1, 1);
@@ -50,6 +51,20 @@ class MovableObject {
             ctx.strokeStyle = 'red';
             ctx.rect(x, y, width, height);
             ctx.stroke();
+        }
+    }
+
+    isColliding(mo){
+        return this.x + this.width > mo.x && 
+        this.y + this.height > mo.y &&
+        this.x < mo.x &&
+        this.y < mo.y + mo.height
+    }
+
+
+    checkIfDead(){
+        if(this.energy <= 0){
+            console.log('is dead')
         }
     }
 
@@ -82,5 +97,5 @@ class MovableObject {
     }
 
 
-    
+
 }
