@@ -39,21 +39,14 @@ class World {
         });
     }
 
-    // Bild spiegelverkehrt zeichnen
+
     addToMap(mo) {
-        // Überprüfen, ob mo.otherDirection true ist
         if (mo.otherDirection) {
-          // Kontextzustand speichern, um später wiederherzustellen
-          this.ctx.save();
-          // Bild horizontal spiegeln (vertikal: this.ctx.scale(1, -1))
-          this.ctx.scale(-1, 1);
-          // Bild zeichnen, linksbündig, indem x-Position und Breite negativ gesetzt werden
-          this.ctx.drawImage(mo.img, -mo.x - mo.width, mo.y, mo.width, mo.height);
-          // Gespeicherten Kontextzustand wiederherstellen, um andere Zeichnungen nicht zu beeinflussen
-          this.ctx.restore();
+            // Bild spiegelverkehrt zeichnen
+            mo.flipImage(mo, this.ctx);
         } else {
-          // Normales Bild zeichnen, ohne Spiegelung
-          this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+            // Normales Bild zeichnen, ohne Spiegelung
+            mo.drawImageNormal(mo, this.ctx);
         }
-      }
+    }
 }
