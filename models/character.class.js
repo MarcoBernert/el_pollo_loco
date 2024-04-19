@@ -54,7 +54,10 @@ class Character extends MovableObject {
 
     animate() {
         setInterval(() => {
+
             this.walkking_sound.pause();
+
+            //move character
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walkking_sound.play();
@@ -73,11 +76,11 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-
+        //show images of character
         setInterval(() => {
-               if(this.isDead()){
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
-            } else if(this.isHurt()){
+            } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);

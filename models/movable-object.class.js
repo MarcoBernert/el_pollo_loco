@@ -1,11 +1,4 @@
-class MovableObject {
-    x = 120;
-    y = 400;
-    img;
-    width;
-    height;
-    imageCache = [];
-    currentImage = 0;
+class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
@@ -23,14 +16,12 @@ class MovableObject {
     }
 
     isAboveGround() {
-        return this.y < 170;
+        if (this instanceof ThrowableObject) {
+            return true
+        } else {
+            return this.y < 170;
+        }
     }
-
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
 
     flipImage(mo, ctx) {
         ctx.save();
@@ -40,20 +31,9 @@ class MovableObject {
         ctx.restore();
     }
 
-    drawImageNormal(mo, ctx) {
-        ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-        this.drawFrame(mo.x, mo.y, mo.width, mo.height, ctx);
-    }
 
-    drawFrame(x, y, width, height, ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
-            ctx.beginPath();
-            ctx.lineWidth = '6';
-            ctx.strokeStyle = 'red';
-            ctx.rect(x, y, width, height);
-            ctx.stroke();
-        }
-    }
+
+
 
     isColliding(mo) {
         return this.x + this.width > mo.x &&
@@ -72,22 +52,14 @@ class MovableObject {
         console.log(this.energy)
     }
 
-    isHurt(){
+    isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < 1;
     }
 
-    isDead(){
+    isDead() {
         return this.energy == 0;
-    }
-
-    loadImages(array) {
-        array.forEach(path => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
     }
 
     playAnimation(images) {
