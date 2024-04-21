@@ -31,7 +31,7 @@ const level1 = new Level(
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 3 * 719),
     ],
     [
-        new CoinObject('img/8_coin/coin_1.png', 250, 80),
+        new CoinObject(),
     ]
 
 );
