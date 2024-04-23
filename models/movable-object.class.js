@@ -4,6 +4,8 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
+    coins = 0;
+    bottles = 0;
     lastHit = 0;
 
     applyGravity() {
@@ -31,10 +33,6 @@ class MovableObject extends DrawableObject {
         ctx.restore();
     }
 
-
-
-
-
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
@@ -50,6 +48,21 @@ class MovableObject extends DrawableObject {
             this.lastHit = new Date().getTime();
         }
         console.log(this.energy)
+    }
+
+    collectCoins() {
+        this.coins += 20;
+        if (this.coins > 100) {
+            this.coins = 100;
+        } 
+        // console.log(this.coins)
+    }
+
+    collectBottles(){
+        this.bottles += 20;
+        if (this.bottles > 100) {
+            this.bottles = 100;
+        } 
     }
 
     isHurt() {

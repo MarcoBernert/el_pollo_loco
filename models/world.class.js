@@ -33,8 +33,8 @@ class World {
         }, 200);
     }
 
-    checkThrowObjects(){
-        if(this.keyboard.D){
+    checkThrowObjects() {
+        if (this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100)
             this.throwableObject.push(bottle)
         }
@@ -47,33 +47,46 @@ class World {
                 this.statusbarEnergy.setPercentage(this.character.energy);
             }
         });
+        this.level.coinObjects.forEach((coin, index) => {
+            if (this.character.isColliding(coin)) {
+                this.character.collectCoins();
+                this.statusbarCoins.setPercentage(this.character.coins);
+                this.statusbarCoins.collect_coin_audio.play();
+                this.level.coinObjects.splice(index, 1);
+            }
+        });
+        this.level.bottles.forEach((bottle, index) => {
+            if (this.character.isColliding(bottle)) {
+                this.character.collectBottles();
+                this.statusbarBottles.setPercentage(this.character.bottles);               
+                this.statusbarBottles.collect_bottle_audio.play();
+                this.level.bottles.splice(index, 1);
+            }
+        });
     }
-    
+
 
     draw() {
-            this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        this.ctx.translate(this.camera_x, 0);
 
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.coinObjects);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.throwableObject);
 
-            this.ctx.translate(this.camera_x, 0);
+        this.ctx.translate(-this.camera_x, 0);
 
-            this.addObjectsToMap(this.level.backgroundObjects);
-            this.addObjectsToMap(this.level.coinObjects);
-            this.addToMap(this.character);
-            this.addObjectsToMap(this.level.bottles);
-            this.addObjectsToMap(this.level.clouds);
-            this.addObjectsToMap(this.level.enemies);
-            this.addObjectsToMap(this.throwableObject);
+        // ----SPACE FOR FIXED OBJECTS----
+        this.addToMap(this.statusbarEnergy);
+        this.addToMap(this.statusbarCoins);
+        this.addToMap(this.statusbarBottles);
 
-            this.ctx.translate(-this.camera_x, 0);
-
-            // ----SPACE FOR FIXED OBJECTS----
-            this.addToMap(this.statusbarEnergy);
-            this.addToMap(this.statusbarCoins);
-            this.addToMap(this.statusbarBottles);
-
-
-            requestAnimationFrame(this.draw.bind(this));
+        requestAnimationFrame(this.draw.bind(this));
     }
 
     addObjectsToMap(objects) {

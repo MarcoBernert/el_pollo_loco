@@ -3,6 +3,7 @@ class statusbarCoins extends DrawableObject {
     y = 0;
     width = 200;
     height = 60;
+    collect_coin_audio = new Audio('audio/collect_coin.mp3');
 
     IMAGES = [
         'img/7_statusbars/1_statusbar/1_statusbar_coin/blue/0.png',
@@ -27,18 +28,18 @@ class statusbarCoins extends DrawableObject {
     }
 
     resolveImageIndex() {
-        if (this.percentage == 100) {
-            return 5;
-        } else if (this.percentage >= 80) {
-            return 4;
-        } else if (this.percentage >= 60) {
-            return 3;
-        } else if (this.percentage >= 40) {
-            return 2;
-        } else if (this.percentage >= 1) {
-            return 1;
-        } else {
+        if (this.percentage == 0) {
             return 0;
+        } else if (this.percentage == 20) {
+            return 1;
+        } else if (this.percentage == 40) {
+            return 2;
+        } else if (this.percentage == 60) {
+            return 3;
+        } else if (this.percentage == 80) {
+            return 4;
+        } else if (this.percentage == 100) {
+            return 5;
         }
     }
 }
