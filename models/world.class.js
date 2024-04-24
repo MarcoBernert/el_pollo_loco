@@ -10,7 +10,6 @@ class World {
     keyboard;
     camera_x = 0;
 
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -23,7 +22,6 @@ class World {
 
     setWorld() {
         this.character.world = this;
-        this.level.enemies.world = this;
     }
 
     run() {
@@ -46,7 +44,7 @@ class World {
 
     checkCollisions() {
 
-
+        //Hühner mit Sprung vernichten
         this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
 
@@ -56,15 +54,28 @@ class World {
                     this.statusbarEnergy.setPercentage(this.character.energy);
 
                 } else if (this.character.isCollidingFromTop) {
-
                     this.character.automaticJumpAfterHitEnemy();
                     this.level.enemies[index].isCollidingFromTop = true;
                     this.character.isCollidingFromTop = false;
                     setTimeout(() => {
                         this.level.enemies.splice(index, 1);
-                    }, 500);
+                    }, 300);
                 }
             }
+        });
+
+        //Hühner mit Flaschenwurf vernichten
+        this.level.enemies.forEach((enemy, index) => {
+            let lastBottle = this.throwableObject.length;
+            if(lastBottle > 0) {
+            if (this.throwableObject[lastBottle - 1].isCollidingNormal(enemy)) {
+                this.level.enemies[index].isCollidingFromTop = true;
+                this.throwableObject.splice((lastBottle - 1), 1);
+                setTimeout(() => {
+                    this.level.enemies.splice(index, 1);
+                }, 300);
+                console.log('hit')
+            }}
         });
 
         // this.level.enemies.forEach((enemy, index) => {
@@ -74,8 +85,6 @@ class World {
         //         this.level.enemies.splice(index, 1);
         //     }
         // });
-
-
 
         this.level.coinObjects.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
@@ -125,7 +134,6 @@ class World {
             this.addToMap(object)
         });
     }
-
 
     addToMap(mo) {
         if (mo.otherDirection) {
