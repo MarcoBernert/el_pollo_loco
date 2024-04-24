@@ -4,9 +4,12 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
+    energyChicken = 100;
     coins = 0;
     bottles = 0;
     lastHit = 0;
+    isCollidingFromSide = false;
+    isCollidingFromTop = false;
 
     applyGravity() {
         setInterval(() => {
@@ -21,7 +24,7 @@ class MovableObject extends DrawableObject {
         if (this instanceof ThrowableObject) {
             return true
         } else {
-            return this.y < 170;
+            return this.y < 163;
         }
     }
 
@@ -33,11 +36,35 @@ class MovableObject extends DrawableObject {
         ctx.restore();
     }
 
+    // isColliding(mo) {
+    //     return this.x + this.width > mo.x &&
+    //         this.y + this.height > mo.y &&
+    //         this.x < mo.x &&
+    //         this.y < mo.y + mo.height
+    // }
+    // isColliding(mo) {
+    //     return this.x + this.width > mo.x &&
+    //         this.y + this.height > mo.y &&
+    //         this.x < mo.x + mo.width &&
+    //         this.y < mo.y + mo.height;
+    // }
+
+
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height
+        // Kollisionsprüfung für seitliche Berührung
+        let fromLeft = this.x + this.width >= mo.x && this.x + this.width <= mo.x + mo.width && this.y < mo.y + mo.height && this.y + this.height > mo.y;
+        let fromRight = this.x <= mo.x + mo.width && this.x >= mo.x && this.y < mo.y + mo.height && this.y + this.height > mo.y;
+
+        // Kollisionsprüfung für Berührung von oben
+        let fromTop = this.y + this.height >= mo.y && this.y + this.height <= mo.y + mo.height && this.x < mo.x + mo.width && this.x + this.width > mo.x;
+
+        // Rückgabe true, wenn eine seitliche oder obere Berührung stattfindet
+        if (fromLeft || fromRight) {
+            return fromLeft || fromRight;
+        } else if (fromTop) {
+            this.isCollidingFromTop = true;
+            return !fromLeft || !fromRight;
+        }
     }
 
     hit() {
@@ -54,15 +81,15 @@ class MovableObject extends DrawableObject {
         this.coins += 20;
         if (this.coins > 100) {
             this.coins = 100;
-        } 
+        }
         // console.log(this.coins)
     }
 
-    collectBottles(){
+    collectBottles() {
         this.bottles += 20;
         if (this.bottles > 100) {
             this.bottles = 100;
-        } 
+        }
     }
 
     isHurt() {
@@ -93,5 +120,9 @@ class MovableObject extends DrawableObject {
 
     jump() {
         this.speedY = 30;
+    }
+
+    automaticJumpAfterHitEnemy() {
+        this.speedY = 27;
     }
 }

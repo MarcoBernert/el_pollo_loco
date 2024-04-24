@@ -23,6 +23,7 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.level.enemies.world = this;
     }
 
     run() {
@@ -34,22 +35,48 @@ class World {
     }
 
     checkThrowObjects() {
-       let bottlesAvailable = this.character.bottles > 0;
+        let bottlesAvailable = this.character.bottles > 0;
         if (this.keyboard.D && bottlesAvailable) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObject.push(bottle);
             this.character.bottles -= 20;
-            this.statusbarBottles.setPercentage(this.character.bottles);  
+            this.statusbarBottles.setPercentage(this.character.bottles);
         }
     }
 
     checkCollisions() {
-        this.level.enemies.forEach(enemy => {
+
+
+        this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusbarEnergy.setPercentage(this.character.energy);
+
+                if (!this.character.isCollidingFromTop) {
+
+                    this.character.hit();
+                    this.statusbarEnergy.setPercentage(this.character.energy);
+
+                } else if (this.character.isCollidingFromTop) {
+
+                    this.character.automaticJumpAfterHitEnemy();
+                    this.level.enemies[index].isCollidingFromTop = true;
+                    this.character.isCollidingFromTop = false;
+                    setTimeout(() => {
+                        this.level.enemies.splice(index, 1);
+                    }, 500);
+                }
             }
         });
+
+        // this.level.enemies.forEach((enemy, index) => {
+        //     if (this.character.isCollidingTop(enemy)) {
+        //         // this.character.hit();
+        //         // this.statusbarEnergy.setPercentage(this.character.energy);
+        //         this.level.enemies.splice(index, 1);
+        //     }
+        // });
+
+
+
         this.level.coinObjects.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.character.collectCoins();
@@ -58,10 +85,11 @@ class World {
                 this.level.coinObjects.splice(index, 1);
             }
         });
+
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.character.collectBottles();
-                this.statusbarBottles.setPercentage(this.character.bottles);               
+                this.statusbarBottles.setPercentage(this.character.bottles);
                 this.statusbarBottles.collect_bottle_audio.play();
                 this.level.bottles.splice(index, 1);
             }

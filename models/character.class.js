@@ -1,9 +1,10 @@
 class Character extends MovableObject {
 
     x = 100;
-    y = 70;
+    y = 0;
     width = 150;
     height = 250;
+    offsetY = 0; // Setzen Sie offsetY auf 0, wenn die Kollisionsbox genau mit der visuellen Darstellung übereinstimmt
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
