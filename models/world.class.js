@@ -67,11 +67,16 @@ class World {
         //Hühner mit Flaschenwurf vernichten
         this.level.enemies.forEach((enemy, index) => {
             let lastBottle = this.throwableObject.length;
+            let bottleIndex = lastBottle - 1;
             if(lastBottle > 0) {
-            if (this.throwableObject[lastBottle - 1].isCollidingNormal(enemy)) {
+            if (this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
                 this.level.enemies[index].isCollidingFromTop = true;
-                this.throwableObject.splice((lastBottle - 1), 1);
+                this.throwableObject[bottleIndex].isCollidingFromTop = true;
+                
+                this.throwableObject.splice((bottleIndex), 1);
+
                 setTimeout(() => {
+                    
                     this.level.enemies.splice(index, 1);
                 }, 300);
                 console.log('hit')
@@ -95,6 +100,7 @@ class World {
             }
         });
 
+        //flasche einsammeln
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.character.collectBottles();
