@@ -10,8 +10,9 @@ class Chicken extends MovableObject {
     IMAGES_DEAD = [
         'img/3_enemies_chicken/chicken_normal/2_dead/dead.png',
     ]
-    walkking_sound = new Audio('audio/chicken.mp3')
-
+    walkking_sound = new Audio('audio/chicken.mp3');
+    energy = 5;
+    
     constructor() {
         super();
         this.loadImage(`img/3_enemies_chicken/chicken_normal/1_walk/1_w.png`);
@@ -24,15 +25,15 @@ class Chicken extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (!this.isCollidingFromTop) {
+            if (this.energy > 0) {
                 this.playAnimation(this.IMAGES_WALKING);
-            } else {
+            } else if(this.energy <= 0) {
                 this.playAnimation(this.IMAGES_DEAD);
             }
         }, 250);
 
         setInterval(() => {
-            if (!this.isCollidingFromTop) {
+            if (this.energy > 0) {
                 this.moveLeft();
             }
         }, 1000 / 60);

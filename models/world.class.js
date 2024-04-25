@@ -44,20 +44,61 @@ class World {
 
     checkCollisions() {
 
+        // //Hühner mit Sprung vernichten
+        // this.level.enemies.forEach((enemy, index) => {
+        //     if (this.character.isColliding(enemy)) {
+
+        //         if (!this.character.isCollidingFromTop) {
+
+        //             this.character.hit();
+        //             this.statusbarEnergy.setPercentage(this.character.energy);
+
+        //         } else if (this.character.isCollidingFromTop) {
+        //             this.character.automaticJumpAfterHitEnemy();
+        //             this.level.enemies[index].isCollidingFromTop = true;
+        //             this.character.isCollidingFromTop = false;
+        //             setTimeout(() => {
+        //                 this.level.enemies.splice(index, 1);
+        //             }, 300);
+        //         }
+        //     }
+        // });
+
         //Hühner mit Sprung vernichten
         this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
-
                 if (!this.character.isCollidingFromTop) {
-
                     this.character.hit();
                     this.statusbarEnergy.setPercentage(this.character.energy);
-
                 } else if (this.character.isCollidingFromTop) {
                     this.character.automaticJumpAfterHitEnemy();
-                    this.level.enemies[index].isCollidingFromTop = true;
+                    enemy.hit();
                     this.character.isCollidingFromTop = false;
+                    if (enemy.energy <= 0) {
+                        setTimeout(() => {
+                            console.log('verschwindet')
+                            this.level.enemies.splice(index, 1);
+                        }, 300);
+                    }
+                }
+            }
+        });
+
+
+        //Hühner mit Flaschenwurf vernichten
+        this.level.enemies.forEach((enemy, index) => {
+            let lastBottle = this.throwableObject.length;
+            let bottleIndex = lastBottle - 1;
+
+            if (lastBottle > 0 && this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
+                enemy.hit();
+
+                console.log(enemy.energy)
+                console.log('hitEnemy')
+
+                if (enemy.energy <= 0) {
                     setTimeout(() => {
+                        console.log('verschwindet')
                         this.level.enemies.splice(index, 1);
                     }, 300);
                 }
@@ -65,23 +106,33 @@ class World {
         });
 
         //Hühner mit Flaschenwurf vernichten
-        this.level.enemies.forEach((enemy, index) => {
-            let lastBottle = this.throwableObject.length;
-            let bottleIndex = lastBottle - 1;
-            if(lastBottle > 0) {
-            if (this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
-                this.level.enemies[index].isCollidingFromTop = true;
-                this.throwableObject[bottleIndex].isCollidingFromTop = true;
-                
-                this.throwableObject.splice((bottleIndex), 1);
+        // this.level.enemies.forEach((enemy, index) => {
+        //     let lastBottle = this.throwableObject.length;
+        //     let bottleIndex = lastBottle - 1;
+        //     if (lastBottle > 0) {
+        //         if (this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
+        //             this.level.enemies[index].isCollidingFromTop = true;
+        //             this.throwableObject[bottleIndex].isCollidingFromTop = true;
 
-                setTimeout(() => {
-                    
-                    this.level.enemies.splice(index, 1);
-                }, 300);
-                console.log('hit')
-            }}
-        });
+        //             if (this.level.enemies[index] instanceof Endboss) {
+        //                 this.level.enemies[index].energy = this.level.enemies[index].energy - 50;
+        //                 console.log('kill endboss')
+        //             } else {
+        //                 console.log('anderer fall')
+        //             }
+
+        //             if (this.level.enemies[index].energy <= 0) {
+        //                 this.throwableObject.splice((bottleIndex), 1);
+        //                 setTimeout(() => {
+        //                     this.level.enemies.splice(index, 1);
+        //                 }, 300);
+        //             }
+        //             console.log('hit')
+        //         }
+        //     }
+        // });
+
+
 
         // this.level.enemies.forEach((enemy, index) => {
         //     if (this.character.isCollidingTop(enemy)) {

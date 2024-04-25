@@ -33,32 +33,25 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
 
         setInterval(() => {
-            if (!this.isCollidingFromTop) {
-                this.x += 10;
-            } else if (this.isCollidingFromTop) {
-                this.x += 0;
+            if (this.isAboveGround) {
+                this.x += 15;
+            } else if (!this.isAboveGround) {
+                this.x = 0;
+                this.y < 163;
             }
-        }, 25);
+        }, 1000/25);
     }
 
-    // throw() {
-    //     // this.playThrowSound();
-    //     // this.wakeUp();
-    //     this.speedY = 20;
-    //     this.applyGravity();
-    //     setInterval(() => {
-    //         this.x += 20;
-    //     }, 1000 / 25);
-    // }
+
 
 
     animate() {
         setInterval(() => {
-            if (!this.isCollidingFromTop) {
+            if (this.isAboveGround) {
 
                 this.playAnimation(this.IMAGES_ROTATION);
 
-            } else if (this.isCollidingFromTop) {
+            } else if (!this.isAboveGround) {
                 this.playAnimation(this.IMAGES_SPLASH);
             }
         }, 60);
