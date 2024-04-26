@@ -9,6 +9,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     isCollidingFromSide = false;
     isCollidingFromTop = false;
+    
 
     applyGravity() {
         setInterval(() => {

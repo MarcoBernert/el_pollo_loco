@@ -92,14 +92,14 @@ class World {
 
             if (lastBottle > 0 && this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
                 enemy.hit();
-
-                console.log(enemy.energy)
-                console.log('hitEnemy')
+                this.throwableObject[bottleIndex].bottleSplash = true;                
+                setTimeout(() => {
+                    this.throwableObject.splice((bottleIndex), 1);
+                }, 300);
 
                 if (enemy.energy <= 0) {
                     setTimeout(() => {
-                        console.log('verschwindet')
-                        this.level.enemies.splice(index, 1);
+                        this.level.enemies.splice(index, 1);                        
                     }, 300);
                 }
             }

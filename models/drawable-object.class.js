@@ -6,7 +6,7 @@ class DrawableObject {
     height;
     imageCache = [];
     currentImage = 0;
-    
+
 
 
     loadImage(path) {
@@ -16,8 +16,14 @@ class DrawableObject {
 
 
     drawImageNormal(mo, ctx) {
-        ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-        this.drawFrame(mo.x, mo.y, mo.width, mo.height, ctx);
+        try {
+            ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+            this.drawFrame(mo.x, mo.y, mo.width, mo.height, ctx);
+
+        } catch (e) {
+            console.log('error', e);
+            console.log('Could not load image', this.img);
+        }
     }
 
     loadImages(array) {
