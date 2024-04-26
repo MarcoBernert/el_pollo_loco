@@ -36,6 +36,8 @@ window.addEventListener('keydown', function (event) {
 });
 
 
+
+
 window.addEventListener('keyup', function (event) {
   if (event.keyCode === 37) {
     keyboard.LEFT = false;
@@ -61,3 +63,4 @@ window.addEventListener('keyup', function (event) {
     keyboard.D = false;
   }
 });
+

@@ -3,6 +3,7 @@ class World {
     statusbarEnergy = new StatusBarEnergy();
     statusbarCoins = new statusbarCoins();
     statusbarBottles = new StatusbarBottles();
+    
     throwableObject = [];
     level = level1;
     ctx;
@@ -13,15 +14,19 @@ class World {
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
+        this.info = new Info(this.canvas);
         this.keyboard = keyboard;
+
         this.draw();
         this.setWorld();
         this.checkCollisions();
         this.run();
+        
     }
 
     setWorld() {
         this.character.world = this;
+        this.info.world = this;
     }
 
     run() {
@@ -92,14 +97,14 @@ class World {
 
             if (lastBottle > 0 && this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
                 enemy.hit();
-                this.throwableObject[bottleIndex].bottleSplash = true;                
+                this.throwableObject[bottleIndex].bottleSplash = true;
                 setTimeout(() => {
                     this.throwableObject.splice((bottleIndex), 1);
                 }, 300);
 
                 if (enemy.energy <= 0) {
                     setTimeout(() => {
-                        this.level.enemies.splice(index, 1);                        
+                        this.level.enemies.splice(index, 1);
                     }, 300);
                 }
             }
@@ -182,6 +187,7 @@ class World {
         this.addToMap(this.statusbarEnergy);
         this.addToMap(this.statusbarCoins);
         this.addToMap(this.statusbarBottles);
+        this.addToMap(this.info);
 
         requestAnimationFrame(this.draw.bind(this));
     }
