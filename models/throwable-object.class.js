@@ -45,9 +45,6 @@ class ThrowableObject extends MovableObject {
         }, 1000 / 25);
     }
 
-
-
-
     animate() {
         setInterval(() => {
             if (!this.bottleSplash) {

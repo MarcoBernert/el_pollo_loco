@@ -3,7 +3,9 @@ class World {
     statusbarEnergy = new StatusBarEnergy();
     statusbarCoins = new statusbarCoins();
     statusbarBottles = new StatusbarBottles();
-    
+    info;
+    setAudio;
+    fullScreen;
     throwableObject = [];
     level = level1;
     ctx;
@@ -14,16 +16,20 @@ class World {
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
-        this.info = new Info(this.canvas);
-        this.setAudio = new SetAudio(this.canvas);
-        this.fullScreen = new FullScreen(this.canvas);
+        this.setIcons();
         this.keyboard = keyboard;
 
         this.draw();
         this.setWorld();
         this.checkCollisions();
         this.run();
-        
+
+    }
+
+    setIcons() {
+        this.info = new Info(this.canvas);
+        this.setAudio = new SetAudio(this.canvas);
+        this.fullScreen = new FullScreen(this.canvas);
     }
 
     setWorld() {
@@ -52,26 +58,6 @@ class World {
     }
 
     checkCollisions() {
-
-        // //Hühner mit Sprung vernichten
-        // this.level.enemies.forEach((enemy, index) => {
-        //     if (this.character.isColliding(enemy)) {
-
-        //         if (!this.character.isCollidingFromTop) {
-
-        //             this.character.hit();
-        //             this.statusbarEnergy.setPercentage(this.character.energy);
-
-        //         } else if (this.character.isCollidingFromTop) {
-        //             this.character.automaticJumpAfterHitEnemy();
-        //             this.level.enemies[index].isCollidingFromTop = true;
-        //             this.character.isCollidingFromTop = false;
-        //             setTimeout(() => {
-        //                 this.level.enemies.splice(index, 1);
-        //             }, 300);
-        //         }
-        //     }
-        // });
 
         //Hühner mit Sprung vernichten
         this.level.enemies.forEach((enemy, index) => {
@@ -114,48 +100,14 @@ class World {
             }
         });
 
-        //Hühner mit Flaschenwurf vernichten
-        // this.level.enemies.forEach((enemy, index) => {
-        //     let lastBottle = this.throwableObject.length;
-        //     let bottleIndex = lastBottle - 1;
-        //     if (lastBottle > 0) {
-        //         if (this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
-        //             this.level.enemies[index].isCollidingFromTop = true;
-        //             this.throwableObject[bottleIndex].isCollidingFromTop = true;
-
-        //             if (this.level.enemies[index] instanceof Endboss) {
-        //                 this.level.enemies[index].energy = this.level.enemies[index].energy - 50;
-        //                 console.log('kill endboss')
-        //             } else {
-        //                 console.log('anderer fall')
-        //             }
-
-        //             if (this.level.enemies[index].energy <= 0) {
-        //                 this.throwableObject.splice((bottleIndex), 1);
-        //                 setTimeout(() => {
-        //                     this.level.enemies.splice(index, 1);
-        //                 }, 300);
-        //             }
-        //             console.log('hit')
-        //         }
-        //     }
-        // });
-
-
-
-        // this.level.enemies.forEach((enemy, index) => {
-        //     if (this.character.isCollidingTop(enemy)) {
-        //         // this.character.hit();
-        //         // this.statusbarEnergy.setPercentage(this.character.energy);
-        //         this.level.enemies.splice(index, 1);
-        //     }
-        // });
 
         this.level.coinObjects.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.character.collectCoins();
                 this.statusbarCoins.setPercentage(this.character.coins);
-                this.statusbarCoins.collect_coin_audio.play();
+                if (this.character.audioOn) {
+                    this.statusbarCoins.collect_coin_audio.play();
+                }
                 this.level.coinObjects.splice(index, 1);
             }
         });
@@ -165,7 +117,9 @@ class World {
             if (this.character.isColliding(bottle)) {
                 this.character.collectBottles();
                 this.statusbarBottles.setPercentage(this.character.bottles);
-                this.statusbarBottles.collect_bottle_audio.play();
+                if (this.character.audioOn) {
+                    this.statusbarBottles.collect_bottle_audio.play();
+                }
                 this.level.bottles.splice(index, 1);
             }
         });

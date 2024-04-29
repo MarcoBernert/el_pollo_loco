@@ -1,4 +1,4 @@
-class statusbarCoins extends DrawableObject {
+    class statusbarCoins extends MovableObject {
     x = 480;
     y = 0;
     width = 200;

@@ -5,11 +5,12 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     energy = 100;
     coins = 0;
-    bottles = 100;
+    bottles = 0;
     lastHit = 0;
     isCollidingFromSide = false;
     isCollidingFromTop = false;
     audioOn = true;
+    fullscreenOn = false;
 
     applyGravity() {
         setInterval(() => {

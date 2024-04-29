@@ -1,4 +1,4 @@
-class StatusbarBottles extends DrawableObject {
+class StatusbarBottles extends MovableObject {
     x = 260;
     y = 0;
     width = 200;
@@ -13,7 +13,7 @@ class StatusbarBottles extends DrawableObject {
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/80.png',
         'img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png',
     ]
-    percentage = 100;
+    percentage = 0;
 
     constructor() {
         super();
