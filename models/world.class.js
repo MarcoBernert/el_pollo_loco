@@ -15,6 +15,8 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.info = new Info(this.canvas);
+        this.setAudio = new SetAudio(this.canvas);
+        this.fullScreen = new FullScreen(this.canvas);
         this.keyboard = keyboard;
 
         this.draw();
@@ -27,6 +29,8 @@ class World {
     setWorld() {
         this.character.world = this;
         this.info.world = this;
+        this.setAudio.world = this;
+        this.fullScreen.world = this;
     }
 
     run() {
@@ -188,6 +192,8 @@ class World {
         this.addToMap(this.statusbarCoins);
         this.addToMap(this.statusbarBottles);
         this.addToMap(this.info);
+        this.addToMap(this.setAudio);
+        this.addToMap(this.fullScreen);
 
         requestAnimationFrame(this.draw.bind(this));
     }

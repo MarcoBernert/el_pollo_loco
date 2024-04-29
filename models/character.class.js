@@ -88,13 +88,17 @@ class Character extends MovableObject {
             //move character
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
-                this.walking_sound.play();
+                if (this.audioOn) {
+                    this.walking_sound.play();
+                }
             }
 
             if (this.world.keyboard.LEFT && this.x > 100) {
                 this.moveLeft();
                 this.otherDirection = true;
-                this.walking_sound.play();
+                if (this.audioOn) {
+                    this.walking_sound.play();
+                }
             }
 
             if ((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isAboveGround()) {
@@ -120,7 +124,7 @@ class Character extends MovableObject {
             }
         }, 50);
 
-  
+
         //idle character
         setInterval(() => {
             const noKeyInputs = !this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.UP && !this.world.keyboard.DOWN && !this.world.keyboard.SPACE && !this.world.keyboard.D;
