@@ -13,6 +13,8 @@ class World {
     keyboard;
     camera_x = 0;
 
+    
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;

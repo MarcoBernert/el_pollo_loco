@@ -4,10 +4,20 @@ let keyboard = new Keyboard();
 
 function init() {
   canvas = document.getElementById('canvas');
-  world = new World(canvas, keyboard);
-  console.log('my character is', world.character)
+  loadStartScreen();
+  // world = new World(canvas, keyboard);
 }
 
+function loadStartScreen(){
+  canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_1.png")';
+  canvas.style.backgroundSize = 'cover';
+}
+
+function startGame(){
+  initLevel1();
+  world = new World(canvas, keyboard);
+  document.getElementById('startGameBtn').classList.add('d-none');
+}
 
 window.addEventListener('keydown', function (event) {
   if (event.keyCode === 37) {

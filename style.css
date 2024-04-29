@@ -1,29 +1,18 @@
-/* ribeye-marrow-regular - latin */
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'Ribeye Marrow';
-    font-style: normal;
-    font-weight: 400;
-    src: url('./fonts/ribeye-marrow-v24-latin-regular.eot'); /* IE9 Compat Modes */
-    src: url('./fonts/ribeye-marrow-v24-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('./fonts/ribeye-marrow-v24-latin-regular.woff2') format('woff2'), /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-         url('./fonts/ribeye-marrow-v24-latin-regular.woff') format('woff'), /* Chrome 5+, Firefox 3.6+, IE 9+, Safari 5.1+, iOS 5+ */
-         url('./fonts/ribeye-marrow-v24-latin-regular.ttf') format('truetype'), /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
-         url('./fonts/ribeye-marrow-v24-latin-regular.svg#RibeyeMarrow') format('svg'); /* Legacy iOS */
-  }
-
+    font-family: 'Zabars'; /* Name, den du für die Schriftart verwenden möchtest */
+    src: url('fonts/Zabars.ttf'); /* Pfad zur TTF-Datei */
+}
 
 
 body {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-image: url('img/background_canvas/bg.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    font-family: 'Ribeye Marrow';
+    font-family: 'Zabars';
     color: bisque;
 }
 
@@ -32,6 +21,37 @@ canvas {
     background-color: black;
 }
 
-h1 {
+#startGameBtn {
     font-size: 50px;
+    color: red;
+    /* background-color: red; */
+}
+
+.startButton {
+    position: absolute;
+    top: 18%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    text-shadow: 2px 2px #ffffff;
+}
+
+.d-none {
+    display: none;
+}
+
+@keyframes resizeAnimation {
+    0% {
+        font-size: 53px; /* Startgröße */
+    }
+    50% {
+        font-size: 55px; /* Zwischengröße */
+    }
+    100% {
+        font-size: 53px; /* Endgröße */
+    }
+}
+
+#startGameBtn {
+    animation: resizeAnimation 1800ms infinite; /* Animation mit einer Dauer von 3 Sekunden, unendlich wiederholt */
 }
