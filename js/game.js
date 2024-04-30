@@ -1,22 +1,67 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let ctx;
 
 function init() {
   canvas = document.getElementById('canvas');
   loadStartScreen();
   // world = new World(canvas, keyboard);
+
 }
 
-function loadStartScreen(){
+function loadStartScreen() {
   canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_1.png")';
   canvas.style.backgroundSize = 'cover';
 }
 
-function startGame(){
+function startGame() {
   initLevel1();
   world = new World(canvas, keyboard);
-  document.getElementById('startGameBtn').classList.add('d-none');
+  document.getElementById('startButton').classList.add('d-none');
+  document.getElementById('overlayLostGame').classList.add('d-none');
+  document.getElementById('overlayWonGame').classList.add('d-none');
+  checkIfGameIsOver();
+}
+
+function checkIfGameIsOver() {
+
+  setInterval(() => {
+    let energyCharacter = world.character.energy;
+    let endbossIndex = world.level.enemies.findIndex((element) => element instanceof Endboss);
+    let energyEndboss = world.level.enemies[endbossIndex].energy;
+
+    if (energyCharacter == 0) {
+      lostGame()
+    } else if (energyEndboss <= 0) {
+      wonGame();
+    }
+
+  }, 1000 / 65);
+}
+
+function lostGame() {
+  setTimeout(() => {
+    let overlay = document.getElementById('overlayLostGame');
+    stopGame();
+    overlay.classList.remove('d-none')
+  }, 100);
+
+}
+
+function wonGame() {
+  setTimeout(() => {
+    let overlay = document.getElementById('overlayWonGame');
+    stopGame();
+    overlay.classList.remove('d-none')
+  }, 100);
+}
+
+
+
+
+function stopGame() {
+  for (let i = 1; i < 9999; i++) window.clearInterval(i);
 }
 
 window.addEventListener('keydown', function (event) {

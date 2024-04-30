@@ -49,14 +49,12 @@ class ThrowableObject extends MovableObject {
         setInterval(() => {
             if (!this.bottleSplash) {
                 this.playAnimation(this.IMAGES_ROTATION);
-                console.log('Rotation');
             }
         }, 60);
     
         setInterval(() => {
             if (this.bottleSplash || this.y > 340) {
                 this.playAnimation(this.IMAGES_SPLASH);
-                console.log('Splash');
             }
         }, 60);
     }

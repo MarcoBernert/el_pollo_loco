@@ -67,6 +67,7 @@ class Character extends MovableObject {
     walking_sound = new Audio('audio/running.mp3')
     lastKeyPressTime = Date.now();
 
+
     constructor() {
         super();
         this.loadImage(`img/2_character_pepe/2_walk/W-21.png`);

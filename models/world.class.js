@@ -13,7 +13,8 @@ class World {
     keyboard;
     camera_x = 0;
 
-    
+
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -24,7 +25,9 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollisions();
+        this.checkIfEnemyIsDead();
         this.run();
+
 
     }
 
@@ -73,7 +76,6 @@ class World {
                     this.character.isCollidingFromTop = false;
                     if (enemy.energy <= 0) {
                         setTimeout(() => {
-                            console.log('verschwindet')
                             this.level.enemies.splice(index, 1);
                         }, 300);
                     }
@@ -127,6 +129,17 @@ class World {
         });
     }
 
+    checkIfEnemyIsDead() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy, index) => {
+                if (enemy.energy <= 0) {
+                    setTimeout(() => {
+                        this.level.enemies.splice(index, 1);
+                    }, 300);
+                }
+            });
+        }, 500);
+    }
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -135,11 +148,11 @@ class World {
 
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.coinObjects);
-        this.addToMap(this.character);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObject);
+        this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
 

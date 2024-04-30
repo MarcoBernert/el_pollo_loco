@@ -16,14 +16,14 @@ class DrawableObject {
 
 
     drawImageNormal(mo, ctx) {
-        try {
+        // try {
             ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
             this.drawFrame(mo.x, mo.y, mo.width, mo.height, ctx);
 
-        } catch (e) {
-            console.log('error', e);
-            console.log('Could not load image', this.img);
-        }
+        // } catch (e) {
+        //     console.log('error', e);
+        //     console.log('Could not load image', this.img);
+        // }
     }
 
     loadImages(array) {
