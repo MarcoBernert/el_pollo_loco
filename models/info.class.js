@@ -1,22 +1,8 @@
-// class Info extends MovableObject {
-//     width = 50;
-//     height = 50;
-//     y = 60;
-//     x = 40;
-//     canvas;
-
-//     constructor(canvas) {
-//         super();
-//         this.canvas = canvas;
-//         this.loadImage(`img/10_settings/info-circle-svgrepo-com.svg`);
-//     }
-// }
-
 class Info extends MovableObject {
-    width = 50;
-    height = 50;
-    y = 60;
-    x = 40;
+    width = 40;
+    height = 40;
+    x = 200;
+    y = 101;
     canvas;
 
     constructor(canvas) {

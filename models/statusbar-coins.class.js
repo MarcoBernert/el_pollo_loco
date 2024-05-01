@@ -1,8 +1,8 @@
-    class statusbarCoins extends MovableObject {
-    x = 480;
-    y = 0;
-    width = 200;
-    height = 60;
+    class StatusbarCoins extends MovableObject {
+    x = 20;
+    y = 40;
+    width = 175;
+    height = 52.5;
     collect_coin_audio = new Audio('audio/collect_coin.mp3');
 
     IMAGES = [

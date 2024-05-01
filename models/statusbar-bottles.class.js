@@ -1,8 +1,8 @@
 class StatusbarBottles extends MovableObject {
-    x = 260;
-    y = 0;
-    width = 200;
-    height = 60;
+    x = 20;
+    y = 85;
+    width = 175;
+    height = 52.5;
     collect_bottle_audio = new Audio('audio/collect_bottle.mp3');
 
     IMAGES = [

@@ -1,8 +1,8 @@
 class FullScreen extends MovableObject {
-    width = 40;
-    height = 40;
-    y = 65;
-    x = 150;
+    width = 30;
+    height = 30;
+    y = 60;
+    x = 205;
     canvas;
     full = false;
 

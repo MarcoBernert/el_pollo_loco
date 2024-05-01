@@ -1,8 +1,8 @@
 class SetAudio extends MovableObject {
-    width = 40;
-    height = 40;
-    y = 65;
-    x = 100;
+    width = 30;
+    height = 30;
+    y = 20;
+    x = 207;
     canvas;
     // audioOn = true;
     world;

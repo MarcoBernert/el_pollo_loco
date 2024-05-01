@@ -92,6 +92,10 @@ window.addEventListener('keydown', function (event) {
   if (event.keyCode === 68) {
     keyboard.D = true;
   }
+
+  if (event.keyCode === 70) {
+    keyboard.D = true;
+  }
 });
 
 
@@ -119,6 +123,10 @@ window.addEventListener('keyup', function (event) {
   }
 
   if (event.keyCode === 68) {
+    keyboard.D = false;
+  }
+
+  if (event.keyCode === 70) {
     keyboard.D = false;
   }
 });

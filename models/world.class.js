@@ -1,8 +1,9 @@
 class World {
     character = new Character();
-    statusbarEnergy = new StatusBarEnergy();
-    statusbarCoins = new statusbarCoins();
+    statusbarEnergy = new StatusbarEnergy();
+    statusbarCoins = new StatusbarCoins();
     statusbarBottles = new StatusbarBottles();
+    statusbarEndboss = new StatusbarEndboss();
     info;
     setAudio;
     fullScreen;
@@ -185,6 +186,7 @@ class World {
         this.addToMap(this.statusbarEnergy);
         this.addToMap(this.statusbarCoins);
         this.addToMap(this.statusbarBottles);
+        this.addToMap(this.statusbarEndboss);
         this.addToMap(this.info);
         this.addToMap(this.setAudio);
         this.addToMap(this.fullScreen);

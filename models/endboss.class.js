@@ -48,7 +48,6 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G25.png',
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ]
-
     energy = 50;
     // world;
     constructor(world) {
@@ -62,11 +61,11 @@ class Endboss extends MovableObject {
         this.world = world;
         this.animate();
         setTimeout(() => {
-            this.moveTowardsEnemy();
+            this.moveTowardsCharacter();
         }, 1000);
     }
 
-    moveTowardsEnemy() {
+    moveTowardsCharacter() {
         setInterval(() => {
             let distance = Math.abs(this.x - this.world.character.x);
 

@@ -37,12 +37,6 @@ class MovableObject extends DrawableObject {
         ctx.restore();
     }
 
-    // isColliding(mo) {
-    //     return this.x + this.width > mo.x &&
-    //         this.y + this.height > mo.y &&
-    //         this.x < mo.x &&
-    //         this.y < mo.y + mo.height
-    // }
 
     isCollidingNormal(mo) {
         return this.x + this.width > mo.x &&
@@ -50,7 +44,6 @@ class MovableObject extends DrawableObject {
             this.x < mo.x + mo.width &&
             this.y < mo.y + mo.height;
     }
-
 
     isColliding(mo) {
         // Kollisionsprüfung für seitliche Berührung
