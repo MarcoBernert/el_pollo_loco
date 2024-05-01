@@ -73,7 +73,7 @@ class World {
                     this.statusbarEnergy.setPercentage(this.character.energy);
                 } else if (this.character.isCollidingFromTop) {
                     this.character.automaticJumpAfterHitEnemy();
-                    enemy.hit();
+                    enemy.hitEnemy();
                     this.character.isCollidingFromTop = false;
                     if (enemy.energy <= 0) {
                         setTimeout(() => {
@@ -104,18 +104,17 @@ class World {
         //     }
         // });
 
+        //Hühner mit Flaschenwurf vernichten
         this.level.enemies.forEach((enemy, index) => {
             let lastBottle = this.throwableObject.length;
             let bottleIndex = lastBottle - 1;
 
             if (lastBottle > 0 && this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
-                enemy.hit();
+                enemy.hitEnemy();
                 this.throwableObject[bottleIndex].bottleSplash = true;
                 setTimeout(() => {
                     this.throwableObject.splice((bottleIndex), 1);
                 }, 300);
-
-
 
                 if (enemy.energy <= 0) {
                     setTimeout(() => {
@@ -126,9 +125,11 @@ class World {
                 let endBossIndex = this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
                 if (endBossIndex !== -1) {
                     enemy.isHurt = true;
+                    this.statusbarEndboss.setPercentage(enemy.energy)
+                    console.log('hitEeeenemy')
                 }
 
-           }
+            }
         });
 
         this.level.coinObjects.forEach((coin, index) => {

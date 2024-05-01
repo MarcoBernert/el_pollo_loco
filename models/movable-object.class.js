@@ -72,6 +72,16 @@ class MovableObject extends DrawableObject {
         console.log(this.energy)
     }
 
+    hitEnemy() {
+        this.energy -= 10;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+        console.log(this.energy)
+    }
+
     collectCoins() {
         this.coins += 20;
         if (this.coins > 100) {

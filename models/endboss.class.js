@@ -48,7 +48,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G25.png',
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ]
-    energy = 50;
+    energy = 100;
     // world;
     constructor(world) {
         super();
