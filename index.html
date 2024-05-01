@@ -35,14 +35,16 @@
         <canvas id="canvas" width="720" height="480"></canvas>
         <div id="startButton" class="startButton" onclick="startGame()">START GAME</div>
         <div id="overlayLostGame" class="gameOverLost d-none">
-            <img class="overlayLostGameImg" src="img/9_intro_outro_screens/game_over/game over!.png" alt="">
             <div id="restartButtonLost" class="restartButtonLost" onclick="startGame()">TRY AGAIN</div>
+            <img class="overlayLostGameImg" src="img/9_intro_outro_screens/game_over/game over!.png" alt="">
+            <div id="openMenuButton" class="openMenuButton" onclick="home()">MENU</div>
         </div>
         <div id="overlayWonGame" class="gameOverWon d-none">
+            <div id="restartButtonWon" class="restartButtonLost" onclick="startGame()">PLAY AGAIN</div>
             <div class="overlayWonGameText">
                 VICTORY IS YOURS!
             </div>
-            <div id="restartButtonWon" class="restartButtonLost" onclick="startGame()">PLAY AGAIN</div>
+            <div id="openMenuButton" class="openMenuButton" onclick="home()">MENU</div>
         </div>
     </div>
 </body>

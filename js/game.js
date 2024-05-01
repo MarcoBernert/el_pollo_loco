@@ -10,6 +10,10 @@ function init() {
 
 }
 
+function home(){
+  location.reload();
+}
+
 function loadStartScreen() {
   canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_1.png")';
   canvas.style.backgroundSize = 'cover';

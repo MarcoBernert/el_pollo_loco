@@ -97,7 +97,6 @@ canvas {
     color: red;
     animation: resizeAnimation 1800ms infinite;
     width: max-content;
-
 }
 
 .overlayWonGameText {
@@ -107,8 +106,17 @@ canvas {
     text-shadow: 2px 2px #ffffff;
 }
 
-
-
+.openMenuButton {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    text-shadow: 2px 2px #ffffff;
+    color: red;
+    animation: resizeAnimation 1800ms infinite;
+    width: max-content;
+}
 
 .d-none {
     display: none;
