@@ -3,12 +3,13 @@ function initLevel1() {
 
     level1 = new Level(
         [
+            new Endboss(this),
             new Chicken(),
             new Chicken(),
             new Chicken(),
             new ChickenSmall(),
             new ChickenSmall(),
-            new Endboss(),
+            
         ],
         [
             new Cloud(),
@@ -50,4 +51,9 @@ function initLevel1() {
             new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png'),
         ],
     )
+
+    let endBossIndex = level1.enemies.findIndex(enemy => enemy instanceof Endboss);
+    if (endBossIndex !== -1) {
+        level1.enemies[endBossIndex].world = this;
+    }
 }

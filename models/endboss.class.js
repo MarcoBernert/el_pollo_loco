@@ -3,7 +3,10 @@ class Endboss extends MovableObject {
     x = 2100;
     width = 300;
     height = 500;
+    speed = 10;
     world;
+    isHurt = false;
+  
 
     IMAGES_WALK = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -46,9 +49,9 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ]
 
-    energy = 5;
-
-    constructor() {
+    energy = 50;
+    // world;
+    constructor(world) {
         super();
         this.loadImage(`img/4_enemie_boss_chicken/1_walk/G1.png`);
         this.loadImages(this.IMAGES_WALK);
@@ -56,14 +59,67 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
+        this.world = world;
         this.animate();
+        setTimeout(() => {
+            this.moveTowardsEnemy();
+        }, 1000);
     }
+
+    moveTowardsEnemy() {
+        setInterval(() => {
+            let distance = Math.abs(this.x - this.world.character.x);
+
+            if (distance < 500) {
+                if (this.x < this.world.character.x) {
+                    this.moveRight();
+                } else {
+                    this.moveLeft();
+                }
+            }
+        }, 200);
+    }
+
+    moveRight() {
+        this.x += this.speed;
+        this.otherDirection = true;
+    }
+
+    moveLeft() {
+        this.x -= this.speed;
+        this.otherDirection = false;
+    }
+
 
     animate() {
+        if (this.world) {
+            setTimeout(() => {
+                console.log(this.world.character.x);
+                console.log("funktioniert.");
+            }, 1000);
+
+        } else {
+            console.log("World oder Character ist nicht definiert.");
+            console.log(this.world.character);
+        }
+
         setInterval(() => {
-            this.playAnimation(this.IMAGES_ATTACK);
+            let distance = Math.abs(this.x - this.world.character.x);
+            if (this.isHurt) {
+                this.playAnimation(this.IMAGES_HURT);
+                setTimeout(() => {
+                    this.isHurt = false;
+                }, 1500);
+            } else if (distance < 250) {
+                this.playAnimation(this.IMAGES_ATTACK);
+                console.log('attack');
+            } else if (distance < 400) {
+                this.playAnimation(this.IMAGES_WALK);
+                console.log('walk');
+            } else {
+                this.playAnimation(this.IMAGES_ALERT);
+                console.log('alert');
+            }
         }, 300);
-
     }
-
 }

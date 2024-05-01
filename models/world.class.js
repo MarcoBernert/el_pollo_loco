@@ -13,22 +13,16 @@ class World {
     keyboard;
     camera_x = 0;
 
-
-
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
-        this.setIcons();
         this.keyboard = keyboard;
-
+        this.setIcons();
         this.draw();
         this.setWorld();
         this.checkCollisions();
         this.checkIfEnemyIsDead();
         this.run();
-
-
     }
 
     setIcons() {
@@ -42,6 +36,12 @@ class World {
         this.info.world = this;
         this.setAudio.world = this;
         this.fullScreen.world = this;
+
+
+        let endBossIndex = this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
+        if (endBossIndex !== -1) {
+            this.level.enemies[endBossIndex].world = this;
+        }
     }
 
     run() {
@@ -83,8 +83,26 @@ class World {
             }
         });
 
-
         //Hühner mit Flaschenwurf vernichten
+        // this.level.enemies.forEach((enemy, index) => {
+        //     let lastBottle = this.throwableObject.length;
+        //     let bottleIndex = lastBottle - 1;
+
+        //     if (lastBottle > 0 && this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
+        //         enemy.hit();
+        //         this.throwableObject[bottleIndex].bottleSplash = true;
+        //         setTimeout(() => {
+        //             this.throwableObject.splice((bottleIndex), 1);
+        //         }, 300);
+
+        //         if (enemy.energy <= 0) {
+        //             setTimeout(() => {
+        //                 this.level.enemies.splice(index, 1);
+        //             }, 300);
+        //         }
+        //     }
+        // });
+
         this.level.enemies.forEach((enemy, index) => {
             let lastBottle = this.throwableObject.length;
             let bottleIndex = lastBottle - 1;
@@ -96,14 +114,21 @@ class World {
                     this.throwableObject.splice((bottleIndex), 1);
                 }, 300);
 
+
+
                 if (enemy.energy <= 0) {
                     setTimeout(() => {
                         this.level.enemies.splice(index, 1);
                     }, 300);
                 }
-            }
-        });
 
+                let endBossIndex = this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
+                if (endBossIndex !== -1) {
+                    enemy.isHurt = true;
+                }
+
+           }
+        });
 
         this.level.coinObjects.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {

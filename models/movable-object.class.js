@@ -3,7 +3,7 @@ class MovableObject extends DrawableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
-    energy = 25;
+    energy = 100;
     coins = 0;
     bottles = 0;
     lastHit = 0;
