@@ -91,17 +91,6 @@ class Endboss extends MovableObject {
 
 
     animate() {
-        if (this.world) {
-            setTimeout(() => {
-                console.log(this.world.character.x);
-                console.log("funktioniert.");
-            }, 1000);
-
-        } else {
-            console.log("World oder Character ist nicht definiert.");
-            console.log(this.world.character);
-        }
-
         setInterval(() => {
             let distance = Math.abs(this.x - this.world.character.x);
             if (this.isHurt) {
@@ -111,13 +100,10 @@ class Endboss extends MovableObject {
                 }, 1500);
             } else if (distance < 250) {
                 this.playAnimation(this.IMAGES_ATTACK);
-                console.log('attack');
             } else if (distance < 400) {
                 this.playAnimation(this.IMAGES_WALK);
-                console.log('walk');
             } else {
                 this.playAnimation(this.IMAGES_ALERT);
-                console.log('alert');
             }
         }, 300);
     }

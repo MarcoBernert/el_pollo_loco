@@ -133,16 +133,10 @@ canvas {
 /* .infoSection {
     width: 150px;
     height: 480px;
-    background-color: red;
-} */
-
-.infoSection {
-    width: 150px;
-    height: 480px;
     background-color: rgba(255, 150, 1, 0.8);
     position: absolute;
-    left: -150px; /* Container wird links ausgerichtet */
-    top: 50%; /* Vertikal zentriert */
+    left: -150px;
+    top: 50%;
     transform: translateY(-50%);
 
     display: flex;
@@ -152,6 +146,54 @@ canvas {
     padding-bottom: 24px;
     box-sizing: border-box;
     font-size: 32px;
+} */
+
+@keyframes slideIn {
+    0% {
+        left: 0px; /* Startposition links außerhalb des sichtbaren Bereichs */
+    }
+
+    100% {
+        left: -150px; /* Endposition, Container sichtbar */
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        left: -150px; /* Startposition, Container sichtbar */
+    }
+
+    100% {
+        left: 0; /* Endposition links außerhalb des sichtbaren Bereichs */
+    }
+}
+
+.infoSection {
+    width: 150px;
+    height: 480px;
+    background-color: rgba(255, 150, 1, 0.8);
+    position: absolute;
+    left: -150px; /* Container wird links ausgerichtet */
+    top: 50%; /* Vertikal zentriert */
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    box-sizing: border-box;
+    font-size: 24px;
+    z-index: -1;
+    animation-duration: 0.5s; /* Dauer der Animation */
+    animation-fill-mode: forwards; /* Endzustand beibehalten */
+}
+
+.slide-in {
+    animation-name: slideIn;
+}
+
+.slide-out {
+    animation-name: slideOut;
 }
 
 .infoContainer {
@@ -167,7 +209,7 @@ canvas {
 }
 
 .infoDescription {
-    font-size: 32px;
+    font-size: 28px;
     color: #ed030b;
     text-shadow: 2px 2px #ffffff;
 }

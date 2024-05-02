@@ -25,6 +25,20 @@ class World {
         this.checkCollisions();
         this.checkIfEnemyIsDead();
         this.run();
+        this.exchangeCoinsForBottles();
+    }
+
+    exchangeCoinsForBottles() {
+        setInterval(() => {
+            if (this.keyboard.F) {
+                if (this.character.coins > 0 && this.character.bottles < 100) {
+                    this.character.coins -= 20;
+                    this.character.bottles += 20;
+                    this.statusbarBottles.setPercentage(this.character.bottles);
+                    this.statusbarCoins.setPercentage(this.character.coins)
+                }
+            }
+        }, 1000 / 65);
     }
 
     setIcons() {
@@ -142,6 +156,7 @@ class World {
             }
         });
 
+        //Coins einsammeln
         this.level.coinObjects.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.character.collectCoins();
@@ -216,4 +231,6 @@ class World {
             mo.drawImageNormal(mo, this.ctx);
         }
     }
+
+
 }
