@@ -32,7 +32,26 @@
 </head>
 
 <body onload="init()">
-    <div style="position: relative;">
+    <div  id="fullscreenArea" class="fullscreenArea">
+        <div id="infoSection" class="infoSection d-none">
+            <div class="infoContainer">
+                <div class="infoHeader">Move left</div>
+                <div class="infoDescription">Left Arrow</div>
+            </div>
+            <div class="infoContainer">
+                <div class="infoHeader">Move right</div>
+                <div class="infoDescription">Right Arrow</div>
+            </div>
+            <div class="infoContainer">
+                <div class="infoHeader">Jump</div>
+                <div class="infoDescription">Arrow Up &</div>
+                <div class="infoDescription">Space</div>
+            </div>
+            <div class="infoContainer">
+                <div class="infoHeader">Throw</div>
+                <div class="infoDescription">D</div>
+            </div>
+        </div>
         <canvas id="canvas" width="720" height="480"></canvas>
         <div id="startButton" class="startButton" onclick="startGame()">START GAME</div>
         <div id="overlayLostGame" class="gameOverLost d-none">
