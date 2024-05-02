@@ -38,7 +38,7 @@ class World {
                     this.statusbarCoins.setPercentage(this.character.coins)
                 }
             }
-        }, 1000 / 65);
+        }, 200 );
     }
 
     setIcons() {

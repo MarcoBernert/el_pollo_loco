@@ -8,14 +8,21 @@
 
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('img/background_canvas/bg.png');
+    background-image: url('img/background_canvas/dessert.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     font-family: 'Zabars';
     color: bisque;
+    display: flex;
+    
+}
+
+h1 {
+   font-size: 54px; 
 }
 
 /* .fullscreenArea {
@@ -216,4 +223,11 @@ canvas {
 
 .d-none {
     display: none;
+}
+
+
+.privacyAndLecagNoticeContainer {
+    display: flex;
+    gap: 16px;
+    margin-top: 50px;
 }
