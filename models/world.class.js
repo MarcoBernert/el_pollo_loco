@@ -13,6 +13,7 @@ class World {
     canvas;
     keyboard;
     camera_x = 0;
+    audioOn = true;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -31,6 +32,15 @@ class World {
         this.setAudio = new SetAudio(this.canvas);
         this.fullScreen = new FullScreen(this.canvas);
     }
+
+    playAudio(audio) {
+        if (this.audioOn) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    }
+
 
     setWorld() {
         this.character.world = this;
@@ -136,9 +146,7 @@ class World {
             if (this.character.isColliding(coin)) {
                 this.character.collectCoins();
                 this.statusbarCoins.setPercentage(this.character.coins);
-                if (this.character.audioOn) {
-                    this.statusbarCoins.collect_coin_audio.play();
-                }
+                this.playAudio(this.statusbarCoins.collect_coin_audio)
                 this.level.coinObjects.splice(index, 1);
             }
         });
@@ -148,9 +156,7 @@ class World {
             if (this.character.isColliding(bottle)) {
                 this.character.collectBottles();
                 this.statusbarBottles.setPercentage(this.character.bottles);
-                if (this.character.audioOn) {
-                    this.statusbarBottles.collect_bottle_audio.play();
-                }
+                this.playAudio(this.statusbarBottles.collect_bottle_audio)
                 this.level.bottles.splice(index, 1);
             }
         });

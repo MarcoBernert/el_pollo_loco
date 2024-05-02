@@ -42,9 +42,11 @@ class SetAudio extends MovableObject {
         if (this.audioOn) {
             this.loadImage(this.audioOnImage); 
             this.world.character.audioOn = true;
+            this.world.audioOn = true;
         } else {
             this.loadImage(this.audioOffImage); 
-            this.world.character.audioOn = false;
+            this.world.audioOn = false;
+
         }
     }
 
