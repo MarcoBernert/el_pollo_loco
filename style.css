@@ -18,11 +18,13 @@ body {
     font-family: 'Zabars';
     color: bisque;
     display: flex;
-    
+
 }
 
 h1 {
-   font-size: 54px; 
+    font-size: 54px;
+    margin-top: 8px;
+    margin-bottom: 16px;
 }
 
 /* .fullscreenArea {
@@ -157,21 +159,25 @@ canvas {
 
 @keyframes slideIn {
     0% {
-        left: 0px; /* Startposition links außerhalb des sichtbaren Bereichs */
+        left: 0px;
+        /* Startposition links außerhalb des sichtbaren Bereichs */
     }
 
     100% {
-        left: -150px; /* Endposition, Container sichtbar */
+        left: -150px;
+        /* Endposition, Container sichtbar */
     }
 }
 
 @keyframes slideOut {
     0% {
-        left: -150px; /* Startposition, Container sichtbar */
+        left: -150px;
+        /* Startposition, Container sichtbar */
     }
 
     100% {
-        left: 0; /* Endposition links außerhalb des sichtbaren Bereichs */
+        left: 0;
+        /* Endposition links außerhalb des sichtbaren Bereichs */
     }
 }
 
@@ -180,8 +186,10 @@ canvas {
     height: 480px;
     background-color: rgba(255, 150, 1, 0.8);
     position: absolute;
-    left: -150px; /* Container wird links ausgerichtet */
-    top: 50%; /* Vertikal zentriert */
+    left: -150px;
+    /* Container wird links ausgerichtet */
+    top: 50%;
+    /* Vertikal zentriert */
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
@@ -191,8 +199,10 @@ canvas {
     box-sizing: border-box;
     font-size: 24px;
     z-index: -1;
-    animation-duration: 0.5s; /* Dauer der Animation */
-    animation-fill-mode: forwards; /* Endzustand beibehalten */
+    animation-duration: 0.5s;
+    /* Dauer der Animation */
+    animation-fill-mode: forwards;
+    /* Endzustand beibehalten */
 }
 
 .slide-in {
@@ -225,9 +235,46 @@ canvas {
     display: none;
 }
 
+/* *****************FAQ***************** */
+
+.bodyFaq {
+    padding: 8px 24px 8px 24px;
+}
+
+.headingFaq {
+    color: white;
+}
+
+.questionsFaq {
+    color: #ed030b;
+    font-size: 28px;
+    text-shadow: 2px 2px #ffffff;
+}
+
+.answersQuestions {
+    color: white;
+    font-size: 24px;
+}
+
+
+/* *****************Privacy And Lega Notice***************** */
 
 .privacyAndLecagNoticeContainer {
     display: flex;
     gap: 16px;
     margin-top: 50px;
+}
+
+.privacyAndLegalNoticeLink {
+    text-decoration: none;
+    color: black;
+}
+
+.bodyPrivacyAndLegalNotice {
+    padding: 8px 24px 8px 24px;
+}
+
+.headingContainer {
+    display: flex;
+    justify-content: space-between;
 }
