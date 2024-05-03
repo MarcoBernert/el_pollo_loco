@@ -32,8 +32,9 @@
 </head>
 
 <body onload="init()">
-    <h1>EL POLLO LOCO</h1>
+    <h1 class="mainHeading">EL POLLO LOCO</h1>
     <div  id="fullscreenArea" class="fullscreenArea">
+        
         <div id="infoSection" class="infoSection d-none">
             <div class="infoContainer">
                 <div class="infoHeader">Move left</div>
@@ -59,6 +60,7 @@
         </div>
         <canvas id="canvas" width="720" height="480"></canvas>
         <div id="startButton" class="startButton" onclick="startGame()">START GAME</div>
+        <a id="faqButton" href="faq.html" class="faqButton">FAQ</a>
         <div id="overlayLostGame" class="gameOverLost d-none">
             <div id="restartButtonLost" class="restartButtonLost" onclick="startGame()">TRY AGAIN</div>
             <img class="overlayLostGameImg" src="img/9_intro_outro_screens/game_over/game over!.png" alt="">
@@ -72,8 +74,6 @@
             <div id="openMenuButton" class="openMenuButton" onclick="home()">MENU</div>
         </div>
     </div>
-
-    <a href="faq.html">FAQ</a>
     <div class="privacyAndLecagNoticeContainer">
         <a class="privacyAndLegalNoticeLink" href="privacy.html">Privacy Policy</a>
         <a  class="privacyAndLegalNoticeLink" href="legal_notice.html">Legal Notice</a>

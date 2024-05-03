@@ -18,13 +18,13 @@ body {
     font-family: 'Zabars';
     color: bisque;
     display: flex;
-
+    margin: 0;
 }
 
 h1 {
-    font-size: 54px;
+    font-size: 74px;
     margin-top: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 /* .fullscreenArea {
@@ -40,18 +40,23 @@ h1 {
 }
 
 canvas {
+    display: block;
     background-color: black;
 }
 
 .startButton {
     position: absolute;
-    top: 18%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     cursor: pointer;
     text-shadow: 2px 2px #ffffff;
     color: red;
     animation: resizeAnimation 1800ms infinite;
+}
+
+.startButton:hover {
+    color: #971217;
 }
 
 @keyframes resizeAnimation {
@@ -237,6 +242,22 @@ canvas {
 
 /* *****************FAQ***************** */
 
+.faqButton {
+    position: absolute;
+    top: 23%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    text-shadow: 2px 2px #ffffff;
+    color: red;
+    text-decoration: none;
+    animation: resizeAnimation 1800ms infinite;
+}
+
+.faqButton:hover {
+    color: #971217;
+}
+
 .bodyFaq {
     padding: 8px 24px 8px 24px;
 }
@@ -262,7 +283,7 @@ canvas {
 .privacyAndLecagNoticeContainer {
     display: flex;
     gap: 16px;
-    margin-top: 50px;
+    margin-top: 24px;
 }
 
 .privacyAndLegalNoticeLink {
@@ -278,3 +299,73 @@ canvas {
     display: flex;
     justify-content: space-between;
 }
+
+
+/* *****************Smartphones***************** */
+
+@media only screen and (max-width: 720px) {
+    
+    .mainHeading {
+        display: none;
+    }
+
+    canvas {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .privacyAndLegalNoticeLink {
+        display: none;
+    }
+
+    .overlayLostGameImg {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .gameOverWon {
+        width: 100%;
+        height: 100%;
+    }
+
+    .privacyAndLecagNoticeContainer {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+
+    .mainHeading {
+        display: none;
+    }
+
+    body {
+        display: block;
+    }
+
+    canvas {
+        height: 100vh;
+        width: 100%;
+    }
+
+    .privacyAndLegalNoticeLink {
+        display: none;
+    }
+
+    .overlayLostGameImg {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .gameOverWon {
+        width: 100%;
+        height: 100%;
+    }
+
+    .privacyAndLecagNoticeContainer {
+        display: none;
+    }
+
+
+}
+

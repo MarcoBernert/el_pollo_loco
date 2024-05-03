@@ -17,12 +17,14 @@ function home(){
 function loadStartScreen() {
   canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_1.png")';
   canvas.style.backgroundSize = 'cover';
+  canvas.style.backgroundPosition = 'center'; 
 }
 
 function startGame() {
   initLevel1();
   world = new World(canvas, keyboard);
   document.getElementById('startButton').classList.add('d-none');
+  document.getElementById('faqButton').classList.add('d-none');
   document.getElementById('overlayLostGame').classList.add('d-none');
   document.getElementById('overlayWonGame').classList.add('d-none');
   checkIfGameIsOver();
