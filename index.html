@@ -33,8 +33,8 @@
 
 <body onload="init()">
     <h1 class="mainHeading">EL POLLO LOCO</h1>
-    <div  id="fullscreenArea" class="fullscreenArea">
-        
+    <div id="fullscreenArea" class="fullscreenArea">
+
         <div id="infoSection" class="infoSection d-none">
             <div class="infoContainer">
                 <div class="infoHeader">Move left</div>
@@ -69,14 +69,25 @@
         <div id="overlayWonGame" class="gameOverWon d-none">
             <div id="restartButtonWon" class="restartButtonLost" onclick="startGame()">PLAY AGAIN</div>
             <div class="overlayWonGameText">
-               THE VICTORY IS YOURS!
+                THE VICTORY IS YOURS!
             </div>
             <div id="openMenuButton" class="openMenuButton" onclick="home()">MENU</div>
+        </div>
+        <div class="mobielButtonsSection d-none" id="mobielButtonsSection">
+            <div class="gap32">
+                <img class="mobielButtons" src="img/13_mobile_buttons/left-button.svg" alt="left button">
+                <img class="mobielButtons" src="img/13_mobile_buttons/right-button.svg" alt="right button">
+            </div>
+            <div class="gap32">
+                <img class="mobielButtons" src="img/13_mobile_buttons/exchange-button.svg" alt="exchange button">
+                <img class="mobielButtons" src="img/13_mobile_buttons/up-button.svg" alt="jump button">
+                <img class="mobielButtons" src="img/13_mobile_buttons/throw-button.svg" alt="throw button">
+            </div>
         </div>
     </div>
     <div class="privacyAndLecagNoticeContainer">
         <a class="privacyAndLegalNoticeLink" href="privacy.html">Privacy Policy</a>
-        <a  class="privacyAndLegalNoticeLink" href="legal_notice.html">Legal Notice</a>
+        <a class="privacyAndLegalNoticeLink" href="legal_notice.html">Legal Notice</a>
     </div>
     <div class="d-none-landscape">Please rotate your phone horizontally for optimal gaming experience.</div>
 </body>

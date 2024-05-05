@@ -27,6 +27,7 @@ function startGame() {
   document.getElementById('faqButton').classList.add('d-none');
   document.getElementById('overlayLostGame').classList.add('d-none');
   document.getElementById('overlayWonGame').classList.add('d-none');
+  document.getElementById('mobielButtonsSection').classList.remove('d-none');
   checkIfGameIsOver();
 }
 
@@ -51,6 +52,7 @@ function lostGame() {
     let overlay = document.getElementById('overlayLostGame');
     stopGame();
     overlay.classList.remove('d-none')
+    document.getElementById('mobielButtonsSection').classList.add('d-none');
   }, 100);
 
 }
@@ -59,7 +61,9 @@ function wonGame() {
   setTimeout(() => {
     let overlay = document.getElementById('overlayWonGame');
     stopGame();
-    overlay.classList.remove('d-none')
+    overlay.classList.remove('d-none');
+    document.getElementById('mobielButtonsSection').classList.add('d-none');
+
   }, 100);
 }
 
