@@ -1,4 +1,8 @@
 let level1;
+
+/**
+ * Initializes level 1 of the game.
+ */
 function initLevel1() {
 
     level1 = new Level(
@@ -52,6 +56,7 @@ function initLevel1() {
         ],
     )
 
+    // Set the world reference for the end boss if present.
     let endBossIndex = level1.enemies.findIndex(enemy => enemy instanceof Endboss);
     if (endBossIndex !== -1) {
         level1.enemies[endBossIndex].world = this;

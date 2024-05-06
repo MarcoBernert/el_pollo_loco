@@ -1,10 +1,13 @@
 class Character extends MovableObject {
-
     x = 100;
     y = 0;
     width = 150;
     height = 250;
-    offsetY = 0; // Setzen Sie offsetY auf 0, wenn die Kollisionsbox genau mit der visuellen Darstellung übereinstimmt
+    world;
+    speed = 10;
+    walking_sound = new Audio('audio/running.mp3')
+    lastKeyPressTime = Date.now();
+
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -62,12 +65,10 @@ class Character extends MovableObject {
         'img/2_character_pepe/1_idle/long_idle/I-19.png',
         'img/2_character_pepe/1_idle/long_idle/I-20.png',
     ];
-    world;
-    speed = 10;
-    walking_sound = new Audio('audio/running.mp3')
-    lastKeyPressTime = Date.now();
 
-
+    /**
+     * Constructs a new Character object.
+     */
     constructor() {
         super();
         this.loadImage(`img/2_character_pepe/2_walk/W-21.png`);
@@ -81,30 +82,50 @@ class Character extends MovableObject {
         this.applyGravity();
     }
 
+     /**
+     * Initiates the animation loop for the character.
+     */
     animate() {
+        this.moveCharacter();
+        this.showPlayAnimationCharacter();
+    }
+
+
+    /**
+     * Moves the character based on keyboard inputs and updates camera position.
+     */
+    moveCharacter() {
         setInterval(() => {
-
             this.walking_sound.pause();
-
-            //move character
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.world.playAudio(this.walking_sound);
             }
-
             if (this.world.keyboard.LEFT && this.x > 100) {
                 this.moveLeft();
                 this.otherDirection = true;
                 this.world.playAudio(this.walking_sound);
             }
-
             if ((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isAboveGround()) {
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
+    }
 
-        //show images of character
+
+    /**
+     * Shows and plays appropriate character animations.
+     */
+    showPlayAnimationCharacter() {
+        this.playAnimationDeadHurtJumpingWalking();
+        this.showPlayAnimationIdle();
+    }
+
+    /**
+     * Plays animations for dead, hurt, jumping, and walking based on character state.
+     */
+    playAnimationDeadHurtJumpingWalking() {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
@@ -118,24 +139,23 @@ class Character extends MovableObject {
                 }
             }
         }, 50);
+    }
 
-
-        //idle character
+    /**
+     * Shows and plays idle animations based on character state.
+     */
+    showPlayAnimationIdle() {
         setInterval(() => {
             const noKeyInputs = !this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.UP && !this.world.keyboard.DOWN && !this.world.keyboard.SPACE && !this.world.keyboard.D;
-
-            // Aktualisiere die Zeit des letzten Tastendrucks, wenn eine erlaubte Taste gedrückt wurde
             if (this.world.keyboard.LEFT || this.world.keyboard.RIGHT || this.world.keyboard.UP || this.world.keyboard.DOWN || this.world.keyboard.SPACE || this.world.keyboard.D) {
                 this.lastKeyPressTime = Date.now();
             }
-
             if (!this.isAboveGround() && noKeyInputs && (Date.now() - this.lastKeyPressTime <= 7500)) {
                 this.playAnimation(this.IMAGES_IDLE);
             } else if (!this.isAboveGround() && noKeyInputs && (Date.now() - this.lastKeyPressTime >= 7500)) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
             }
         }, 200);
-
     }
 }
 

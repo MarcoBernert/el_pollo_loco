@@ -12,6 +12,9 @@ class MovableObject extends DrawableObject {
     audioOn = true;
     fullscreenOn = false;
 
+    /**
+     * Applies gravity to the object, making it fall if not supported by a surface.
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -21,6 +24,10 @@ class MovableObject extends DrawableObject {
         }, 1000 / 25);
     }
 
+    /**
+     * Checks if the object is above the ground.
+     * @returns {boolean} - Indicates if the object is above the ground.
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return true
@@ -29,6 +36,11 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Flips the image horizontally for the given object.
+     * @param {object} mo - The movable object.
+     * @param {CanvasRenderingContext2D} ctx - The rendering context of the canvas.
+     */
     flipImage(mo, ctx) {
         ctx.save();
         ctx.scale(-1, 1);
@@ -37,7 +49,11 @@ class MovableObject extends DrawableObject {
         ctx.restore();
     }
 
-
+    /**
+     * Checks if the object is colliding with another object in a normal manner (not considering falling).
+     * @param {object} mo - The other movable object.
+     * @returns {boolean} - Indicates if the collision occurs.
+     */
     isCollidingNormal(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
@@ -45,15 +61,15 @@ class MovableObject extends DrawableObject {
             this.y < mo.y + mo.height;
     }
 
+    /**
+     * Checks if the object is colliding with another object.
+     * @param {object} mo - The other movable object.
+     * @returns {boolean} - Indicates if the collision occurs.
+     */
     isColliding(mo) {
-        // Kollisionsprüfung für seitliche Berührung
         let fromLeft = this.x + this.width >= mo.x && this.x + this.width <= mo.x + mo.width && this.y < mo.y + mo.height && this.y + this.height > mo.y;
         let fromRight = this.x <= mo.x + mo.width && this.x >= mo.x && this.y < mo.y + mo.height && this.y + this.height > mo.y;
-
-        // Kollisionsprüfung für Berührung von oben
         let fromTop = this.y + this.height >= mo.y && this.y + this.height <= mo.y + mo.height && this.x < mo.x + mo.width && this.x + this.width > mo.x;
-
-        // Rückgabe true, wenn eine seitliche oder obere Berührung stattfindet
         if (fromLeft || fromRight) {
             return fromLeft || fromRight;
         } else if (fromTop) {
@@ -62,6 +78,9 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Reduces the energy of the object after being hit.
+     */
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {
@@ -69,9 +88,11 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-        console.log(this.energy)
     }
 
+    /**
+     * Reduces the energy of the object after hitting an enemy.
+     */
     hitEnemy() {
         this.energy -= 10;
         if (this.energy < 0) {
@@ -79,17 +100,21 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-        console.log(this.energy)
     }
 
+    /**
+     * Increases the number of collected coins.
+     */
     collectCoins() {
         this.coins += 20;
         if (this.coins > 100) {
             this.coins = 100;
         }
-        // console.log(this.coins)
     }
 
+    /**
+     * Increases the number of collected bottles.
+     */
     collectBottles() {
         this.bottles += 20;
         if (this.bottles > 100) {
@@ -97,16 +122,28 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Checks if the object is hurt within the last second.
+     * @returns {boolean} - Indicates if the object is hurt.
+     */
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000;
         return timepassed < 1;
     }
 
+    /**
+     * Checks if the object is dead (energy depleted).
+     * @returns {boolean} - Indicates if the object is dead.
+     */
     isDead() {
         return this.energy == 0;
     }
 
+    /**
+     * Plays animation by updating the current image.
+     * @param {Array} images - Array of image paths for animation.
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -114,19 +151,31 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    /**
+     * Moves the object to the right.
+     */
     moveRight() {
         this.x += this.speed;
         this.otherDirection = false;
     }
 
+    /**
+     * Moves the object to the left.
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
+    /**
+     * Initiates a jump action for the object.
+     */
     jump() {
         this.speedY = 30;
     }
 
+    /**
+     * Initiates an automatic jump action after hitting an enemy.
+     */
     automaticJumpAfterHitEnemy() {
         this.speedY = 27;
     }

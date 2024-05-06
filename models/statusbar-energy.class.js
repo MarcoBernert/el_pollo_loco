@@ -14,18 +14,29 @@ class StatusbarEnergy extends DrawableObject {
     ]
     percentage = 100;
 
+    /**
+     * Initializes the StatusbarEnergy object.
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES);
         this.setPercentage(this.percentage);
     }
 
+    /**
+     * Sets the percentage of the player's energy and updates the displayed image accordingly.
+     * @param {number} percentage - The percentage of the player's energy.
+     */
     setPercentage(percentage) {
         this.percentage = percentage
         let path = this.IMAGES[this.resolveImageIndex()]
         this.img = this.imageCache[path]
     }
 
+    /**
+     * Resolves the index of the image based on the current energy percentage.
+     * @returns {number} - The index of the image in the IMAGES array.
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

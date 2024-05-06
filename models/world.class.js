@@ -15,6 +15,11 @@ class World {
     camera_x = 0;
     audioOn = true;
 
+    /**
+     * Initializes the game world.
+     * @param {HTMLCanvasElement} canvas - The canvas element.
+     * @param {Keyboard} keyboard - The keyboard input handler.
+     */
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -28,6 +33,9 @@ class World {
         this.exchangeCoinsForBottles();
     }
 
+    /**
+     * Initiates the exchange of coins for bottles.
+     */
     exchangeCoinsForBottles() {
         setInterval(() => {
             if (this.keyboard.F) {
@@ -41,12 +49,19 @@ class World {
         }, 200 );
     }
 
+    /**
+     * Sets up icons for information, audio, and full screen.
+     */
     setIcons() {
         this.info = new Info(this.canvas);
         this.setAudio = new SetAudio(this.canvas);
         this.fullScreen = new FullScreen(this.canvas);
     }
 
+    /**
+     * Plays audio if audio is enabled.
+     * @param {HTMLAudioElement} audio - The audio element to play.
+     */
     playAudio(audio) {
         if (this.audioOn) {
             audio.play();
@@ -55,28 +70,33 @@ class World {
         }
     }
 
-
+    /**
+     * Sets up the world environment.
+     */
     setWorld() {
         this.character.world = this;
         this.info.world = this;
         this.setAudio.world = this;
         this.fullScreen.world = this;
-
-
         let endBossIndex = this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
         if (endBossIndex !== -1) {
             this.level.enemies[endBossIndex].world = this;
         }
     }
 
+    /**
+     * Initiates the main game loop.
+     */
     run() {
-        //Check collisions
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
         }, 200);
     }
 
+    /**
+     * Checks for the throw action and creates throwable objects.
+     */
     checkThrowObjects() {
         let bottlesAvailable = this.character.bottles > 0;
         if (this.keyboard.D && bottlesAvailable) {
@@ -87,9 +107,20 @@ class World {
         }
     }
 
+    /**
+     * Checks for collisions between game objects.
+     */
     checkCollisions() {
+        this.destroyEnemiesWithJump();
+        this.destroyEnemiesWithBottle(); 
+        this.collectCoins();      
+        this.collectBottles();
+    }
 
-        //Hühner mit Sprung vernichten
+    /**
+     * Destroys enemies upon collision with the main character's jump.
+     */
+    destroyEnemiesWithJump(){
         this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
                 if (!this.character.isCollidingFromTop) {
@@ -107,56 +138,39 @@ class World {
                 }
             }
         });
-
-        //Hühner mit Flaschenwurf vernichten
-        // this.level.enemies.forEach((enemy, index) => {
-        //     let lastBottle = this.throwableObject.length;
-        //     let bottleIndex = lastBottle - 1;
-
-        //     if (lastBottle > 0 && this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
-        //         enemy.hit();
-        //         this.throwableObject[bottleIndex].bottleSplash = true;
-        //         setTimeout(() => {
-        //             this.throwableObject.splice((bottleIndex), 1);
-        //         }, 300);
-
-        //         if (enemy.energy <= 0) {
-        //             setTimeout(() => {
-        //                 this.level.enemies.splice(index, 1);
-        //             }, 300);
-        //         }
-        //     }
-        // });
-
-        //Hühner mit Flaschenwurf vernichten
+    }
+    
+    /**
+     * Destroys enemies upon collision with a throwable object (bottle).
+     */
+    destroyEnemiesWithBottle(){
         this.level.enemies.forEach((enemy, index) => {
             let lastBottle = this.throwableObject.length;
             let bottleIndex = lastBottle - 1;
-
             if (lastBottle > 0 && this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
                 enemy.hitEnemy();
                 this.throwableObject[bottleIndex].bottleSplash = true;
                 setTimeout(() => {
                     this.throwableObject.splice((bottleIndex), 1);
                 }, 300);
-
                 if (enemy.energy <= 0) {
                     setTimeout(() => {
                         this.level.enemies.splice(index, 1);
                     }, 300);
                 }
-
                 let endBossIndex = this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
                 if (endBossIndex !== -1) {
                     enemy.isHurt = true;
                     this.statusbarEndboss.setPercentage(enemy.energy)
-                    console.log('hitEeeenemy')
                 }
-
             }
         });
+    }
 
-        //Coins einsammeln
+    /**
+     * Collects coins upon collision with the main character.
+     */
+    collectCoins(){
         this.level.coinObjects.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.character.collectCoins();
@@ -165,8 +179,12 @@ class World {
                 this.level.coinObjects.splice(index, 1);
             }
         });
+    }
 
-        //flasche einsammeln
+    /**
+     * Collects bottles upon collision with the main character.
+     */
+    collectBottles(){
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.character.collectBottles();
@@ -177,6 +195,9 @@ class World {
         });
     }
 
+    /**
+     * Checks if enemies are dead and removes them from the level.
+     */
     checkIfEnemyIsDead() {
         setInterval(() => {
             this.level.enemies.forEach((enemy, index) => {
@@ -189,9 +210,11 @@ class World {
         }, 1000);
     }
 
+    /**
+     * Draws the game environment.
+     */
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
@@ -216,18 +239,24 @@ class World {
         requestAnimationFrame(this.draw.bind(this));
     }
 
+    /**
+     * Adds objects to the map for rendering.
+     * @param {Array} objects - The array of objects to add.
+     */
     addObjectsToMap(objects) {
         objects.forEach(object => {
             this.addToMap(object)
         });
     }
 
+    /**
+     * Adds an object to the map for rendering.
+     * @param {DrawableObject} mo - The drawable object to add.
+     */
     addToMap(mo) {
         if (mo.otherDirection) {
-            // Bild spiegelverkehrt zeichnen
             mo.flipImage(mo, this.ctx);
         } else {
-            // Normales Bild zeichnen, ohne Spiegelung
             mo.drawImageNormal(mo, this.ctx);
         }
     }

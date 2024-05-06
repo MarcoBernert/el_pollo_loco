@@ -7,14 +7,20 @@ class DrawableObject {
     imageCache = [];
     currentImage = 0;
 
-
-
+    /**
+     * Loads an image from the specified path.
+     * @param {string} path - The path to the image.
+     */
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
-
+    /**
+     * Draws the image of the given movable object on the canvas.
+     * @param {MovableObject} mo - The movable object to be drawn.
+     * @param {CanvasRenderingContext2D} ctx - The rendering context of the canvas.
+     */
     drawImageNormal(mo, ctx) {
         // try {
             ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
@@ -26,6 +32,10 @@ class DrawableObject {
         // }
     }
 
+    /**
+     * Preloads images from the provided array of paths into the image cache.
+     * @param {string[]} array - Array of image paths to preload.
+     */
     loadImages(array) {
         array.forEach(path => {
             let img = new Image();

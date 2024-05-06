@@ -21,12 +21,19 @@
         this.setPercentage(0);
     }
 
+    /**
+     * Initializes the StatusbarCoins object.
+     */
     setPercentage(percentage) {
         this.percentage = percentage
         let path = this.IMAGES[this.resolveImageIndex()]
         this.img = this.imageCache[path]
     }
 
+    /**
+     * Resolves the index of the image based on the current percentage.
+     * @returns {number} - The index of the image in the IMAGES array.
+     */
     resolveImageIndex() {
         if (this.percentage == 0) {
             return 0;

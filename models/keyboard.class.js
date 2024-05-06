@@ -1,3 +1,6 @@
+/**
+ * Represents a keyboard object tracking pressed keys.
+ */
 class Keyboard {
     RIGHT = false;
     LEFT = false;

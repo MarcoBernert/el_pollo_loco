@@ -15,18 +15,29 @@ class StatusbarBottles extends MovableObject {
     ]
     percentage = 0;
 
+    /**
+     * Initializes the StatusbarBottles object.
+     */
     constructor() {
         super();
         this.loadImages(this.IMAGES);
         this.setPercentage(0);
     }
 
+    /**
+     * Sets the percentage of bottles and updates the displayed image accordingly.
+     * @param {number} percentage - The percentage of bottles.
+     */
     setPercentage(percentage) {
         this.percentage = percentage
         let path = this.IMAGES[this.resolveImageIndex()]
         this.img = this.imageCache[path]
     }
 
+    /**
+     * Resolves the index of the image based on the current percentage.
+     * @returns {number} - The index of the image in the IMAGES array.
+     */
     resolveImageIndex() {
         if (this.percentage == 0) {
             return 0;

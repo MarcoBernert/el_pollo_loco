@@ -6,15 +6,14 @@ class Endboss extends MovableObject {
     speed = 10;
     world;
     isHurt = false;
-  
+    energy = 100;
 
     IMAGES_WALK = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',
         'img/4_enemie_boss_chicken/1_walk/G2.png',
         'img/4_enemie_boss_chicken/1_walk/G3.png',
         'img/4_enemie_boss_chicken/1_walk/G4.png',
-    ]
-
+    ];
     IMAGES_ALERT = [
         'img/4_enemie_boss_chicken/2_alert/G5.png',
         'img/4_enemie_boss_chicken/2_alert/G6.png',
@@ -24,8 +23,7 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/2_alert/G10.png',
         'img/4_enemie_boss_chicken/2_alert/G11.png',
         'img/4_enemie_boss_chicken/2_alert/G12.png',
-    ]
-
+    ];
     IMAGES_ATTACK = [
         'img/4_enemie_boss_chicken/3_attack/G13.png',
         'img/4_enemie_boss_chicken/3_attack/G14.png',
@@ -35,21 +33,22 @@ class Endboss extends MovableObject {
         'img/4_enemie_boss_chicken/3_attack/G18.png',
         'img/4_enemie_boss_chicken/3_attack/G19.png',
         'img/4_enemie_boss_chicken/3_attack/G20.png',
-    ]
-
+    ];
     IMAGES_HURT = [
         'img/4_enemie_boss_chicken/4_hurt/G21.png',
         'img/4_enemie_boss_chicken/4_hurt/G22.png',
         'img/4_enemie_boss_chicken/4_hurt/G23.png',
-    ]
-
+    ];
     IMAGES_DEAD = [
         'img/4_enemie_boss_chicken/5_dead/G24.png',
         'img/4_enemie_boss_chicken/5_dead/G25.png',
         'img/4_enemie_boss_chicken/5_dead/G26.png',
     ]
-    energy = 100;
-    // world;
+
+    /**
+     * Constructs an Endboss instance and initializes its properties.
+     * @param {World} world - The game world.
+     */
     constructor(world) {
         super();
         this.loadImage(`img/4_enemie_boss_chicken/1_walk/G1.png`);
@@ -65,10 +64,12 @@ class Endboss extends MovableObject {
         }, 1000);
     }
 
+    /**
+     * Moves the end boss towards the character.
+     */
     moveTowardsCharacter() {
         setInterval(() => {
             let distance = Math.abs(this.x - this.world.character.x);
-
             if (distance < 500) {
                 if (this.x < this.world.character.x) {
                     this.moveRight();
@@ -79,17 +80,25 @@ class Endboss extends MovableObject {
         }, 200);
     }
 
+    /**
+     * Moves the end boss to the right.
+     */
     moveRight() {
         this.x += this.speed;
         this.otherDirection = true;
     }
 
+    /**
+     * Moves the end boss to the left.
+     */
     moveLeft() {
         this.x -= this.speed;
         this.otherDirection = false;
     }
 
-
+    /**
+     * Initiates the animation loop for the end boss.
+     */
     animate() {
         setInterval(() => {
             let distance = Math.abs(this.x - this.world.character.x);

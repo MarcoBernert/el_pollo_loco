@@ -2,6 +2,9 @@ class ChickenSmall extends MovableObject {
     y = 365;
     width = 75;
     height = 75;
+    energy = 5;
+    walkking_sound = new Audio('audio/chicken.mp3');
+
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_small/1_walk/2_w.png',
@@ -9,10 +12,11 @@ class ChickenSmall extends MovableObject {
     ];
     IMAGES_DEAD = [
         'img/3_enemies_chicken/chicken_small/2_dead/dead.png',
-    ]
-    walkking_sound = new Audio('audio/chicken.mp3');
-    energy = 5;
+    ] 
 
+    /**
+     * Constructs a ChickenSmall instance and initializes its properties.
+     */
     constructor() {
         super();
         this.loadImage(`img/3_enemies_chicken/chicken_normal/1_walk/1_w.png`);
@@ -23,6 +27,9 @@ class ChickenSmall extends MovableObject {
         this.speed = 1 + Math.random() * 0.25;
     }
 
+    /**
+     * Initiates the animation loop for the small chicken enemy.
+     */
     animate() {
         setInterval(() => {
             if (!this.isCollidingFromTop) {
@@ -31,7 +38,6 @@ class ChickenSmall extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
             }
         }, 250);
-
         setInterval(() => {
             if (!this.isCollidingFromTop) {
                 this.moveLeft();

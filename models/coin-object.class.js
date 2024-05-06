@@ -7,6 +7,9 @@ class CoinObject extends MovableObject {
         'img/8_coin/coin_2.png',
     ]
 
+    /**
+     * Constructs a CoinObject instance and initializes its properties.
+     */
     constructor() {
         super().loadImage('img/8_coin/coin_1.png');
         this.x = Math.random() * 2000 + 100;
@@ -15,11 +18,12 @@ class CoinObject extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Initiates an animation loop by cycling through a set of images at regular intervals. 
+     */
     animate() {
         setInterval(() => {
-            // this.walkking_sound.play();
             this.playAnimation(this.IMAGES);
         }, 250);
     }
-    
 }
