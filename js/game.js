@@ -2,6 +2,8 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let ctx;
+let won_sound = new Audio('audio/won.mp3');
+let lost_sound = new Audio('audio/lost1.mp3')
 
 /**
  * Initializes the game by setting up the canvas, loading the start screen, and setting up keyboard and touch events.
@@ -51,7 +53,7 @@ function checkIfGameIsOver() {
     let endbossIndex = world.level.enemies.findIndex((element) => element instanceof Endboss);
     let energyEndboss = world.level.enemies[endbossIndex].energy;
     if (energyCharacter == 0) {
-      lostGame()
+      lostGame();
     } else if (energyEndboss <= 0) {
       wonGame();
     }
@@ -64,6 +66,8 @@ function checkIfGameIsOver() {
 function lostGame() {
   setTimeout(() => {
     let overlay = document.getElementById('overlayLostGame');
+    world.background_sound.pause();
+    world.playAudio(lost_sound);
     stopGame();
     overlay.classList.remove('d-none')
     document.getElementById('mobielButtonsSection').classList.add('d-none');
@@ -77,6 +81,8 @@ function lostGame() {
 function wonGame() {
   setTimeout(() => {
     let overlay = document.getElementById('overlayWonGame');
+    world.playAudio(won_sound);
+    world.background_sound.pause();
     stopGame();
     overlay.classList.remove('d-none');
     document.getElementById('mobielButtonsSection').classList.add('d-none');

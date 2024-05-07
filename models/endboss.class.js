@@ -3,9 +3,10 @@ class Endboss extends MovableObject {
     x = 2100;
     width = 300;
     height = 500;
-    speed = 10;
+    speed = 20;
     world;
     isHurt = false;
+    sound = new Audio('audio/chicken.mp3')
     energy = 100;
 
     IMAGES_WALK = [
@@ -70,7 +71,7 @@ class Endboss extends MovableObject {
     moveTowardsCharacter() {
         setInterval(() => {
             let distance = Math.abs(this.x - this.world.character.x);
-            if (distance < 500) {
+            if (distance < 600) {
                 if (this.x < this.world.character.x) {
                     this.moveRight();
                 } else {
@@ -107,10 +108,13 @@ class Endboss extends MovableObject {
                 setTimeout(() => {
                     this.isHurt = false;
                 }, 1500);
+                this.world.playAudio(this.sound);
             } else if (distance < 250) {
                 this.playAnimation(this.IMAGES_ATTACK);
-            } else if (distance < 400) {
+                this.world.playAudio(this.sound);
+            } else if (distance < 600) {
                 this.playAnimation(this.IMAGES_WALK);
+                this.world.playAudio(this.sound);
             } else {
                 this.playAnimation(this.IMAGES_ALERT);
             }

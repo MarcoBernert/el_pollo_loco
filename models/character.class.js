@@ -5,8 +5,11 @@ class Character extends MovableObject {
     height = 250;
     world;
     speed = 10;
+    lastKeyPressTime;
     walking_sound = new Audio('audio/running.mp3')
-    lastKeyPressTime = Date.now();
+    jumping_sound = new Audio('audio/jump.mp3')
+    hurt_sound = new Audio('audio/ouch.mp3');
+    long_idle_sound = new Audio('audio/long_idle2.mp3');
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
@@ -82,14 +85,13 @@ class Character extends MovableObject {
         this.applyGravity();
     }
 
-     /**
-     * Initiates the animation loop for the character.
-     */
+    /**
+    * Initiates the animation loop for the character.
+    */
     animate() {
         this.moveCharacter();
         this.showPlayAnimationCharacter();
     }
-
 
     /**
      * Moves the character based on keyboard inputs and updates camera position.
@@ -108,29 +110,31 @@ class Character extends MovableObject {
             }
             if ((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isAboveGround()) {
                 this.jump();
+                this.world.playAudio(this.jumping_sound);
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
     }
 
-
     /**
      * Shows and plays appropriate character animations.
      */
     showPlayAnimationCharacter() {
-        this.playAnimationDeadHurtJumpingWalking();
+        this.showPlayAnimationMove();
         this.showPlayAnimationIdle();
+
     }
 
     /**
      * Plays animations for dead, hurt, jumping, and walking based on character state.
      */
-    playAnimationDeadHurtJumpingWalking() {
+    showPlayAnimationMove() {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                this.world.playAudio(this.hurt_sound);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
             } else {
@@ -145,6 +149,7 @@ class Character extends MovableObject {
      * Shows and plays idle animations based on character state.
      */
     showPlayAnimationIdle() {
+        this.lastKeyPressTime = Date.now();
         setInterval(() => {
             const noKeyInputs = !this.world.keyboard.LEFT && !this.world.keyboard.RIGHT && !this.world.keyboard.UP && !this.world.keyboard.DOWN && !this.world.keyboard.SPACE && !this.world.keyboard.D;
             if (this.world.keyboard.LEFT || this.world.keyboard.RIGHT || this.world.keyboard.UP || this.world.keyboard.DOWN || this.world.keyboard.SPACE || this.world.keyboard.D) {
@@ -154,6 +159,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_IDLE);
             } else if (!this.isAboveGround() && noKeyInputs && (Date.now() - this.lastKeyPressTime >= 7500)) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
+                this.world.playAudio(this.long_idle_sound);
             }
         }, 200);
     }

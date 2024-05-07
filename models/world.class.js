@@ -13,7 +13,12 @@ class World {
     canvas;
     keyboard;
     camera_x = 0;
+    bottle;
     audioOn = true;
+    background_sound = new Audio('audio/music.mp3');
+    buying_bottle_sound = new Audio('audio/buying_bottle2.mp3')
+    durationSound;
+    
 
     /**
      * Initializes the game world.
@@ -31,6 +36,30 @@ class World {
         this.checkIfEnemyIsDead();
         this.run();
         this.exchangeCoinsForBottles();
+        this.checkDurationMusic()
+    }
+
+    /**
+    * Checks the duration of the music file and starts playing it.
+    */
+    checkDurationMusic() {
+        if (!isNaN(this.background_sound.duration)) {
+            this.durationSound = this.background_sound.duration;
+            this.startMusic();
+        } else {
+            setTimeout(() => {
+                this.checkDurationMusic();
+            }, 100); // 
+        }
+    }
+
+    /**
+    * Starts playing the music at a regular interval based on its duration.
+    */
+    startMusic(){
+        setInterval(() => {
+            this.playAudio(this.background_sound)
+        }, this.durationSound);
     }
 
     /**
@@ -44,9 +73,10 @@ class World {
                     this.character.bottles += 20;
                     this.statusbarBottles.setPercentage(this.character.bottles);
                     this.statusbarCoins.setPercentage(this.character.coins)
+                    this.playAudio(this.buying_bottle_sound)
                 }
             }
-        }, 200 );
+        }, 100 );
     }
 
     /**
@@ -56,7 +86,7 @@ class World {
         this.info = new Info(this.canvas);
         this.setAudio = new SetAudio(this.canvas);
         this.fullScreen = new FullScreen(this.canvas);
-    }
+    }  
 
     /**
      * Plays audio if audio is enabled.
@@ -78,6 +108,18 @@ class World {
         this.info.world = this;
         this.setAudio.world = this;
         this.fullScreen.world = this;
+
+        setInterval(() => {
+            if(this.bottle){
+                this.bottle.world = this;
+            }
+        }, 100);
+
+        this.level.enemies.forEach(enemy => {
+            enemy.world = this;
+        });
+
+
         let endBossIndex = this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
         if (endBossIndex !== -1) {
             this.level.enemies[endBossIndex].world = this;
@@ -100,8 +142,8 @@ class World {
     checkThrowObjects() {
         let bottlesAvailable = this.character.bottles > 0;
         if (this.keyboard.D && bottlesAvailable) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObject.push(bottle);
+            this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObject.push(this.bottle);
             this.character.bottles -= 20;
             this.statusbarBottles.setPercentage(this.character.bottles);
         }

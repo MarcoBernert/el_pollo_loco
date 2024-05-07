@@ -1,11 +1,10 @@
+/* Font */
 @font-face {
     font-family: 'Zabars';
-    /* Name, den du für die Schriftart verwenden möchtest */
     src: url('fonts/Zabars.ttf');
-    /* Pfad zur TTF-Datei */
 }
 
-
+/* Body */
 body {
     display: flex;
     flex-direction: column;
@@ -17,21 +16,17 @@ body {
     background-position: center;
     font-family: 'Zabars';
     color: bisque;
-    display: flex;
     margin: 0;
 }
 
+/* Heading */
 h1 {
     font-size: 74px;
     margin-top: 8px;
     margin-bottom: 24px;
 }
 
-/* .fullscreenArea {
-    position: relative;
-
-} */
-
+/* Fullscreen Area */
 .fullscreenArea {
     display: flex;
     justify-content: center;
@@ -39,11 +34,13 @@ h1 {
     position: relative;
 }
 
+/* Canvas */
 canvas {
     display: block;
     background-color: black;
 }
 
+/* Start Button */
 .startButton {
     position: absolute;
     top: 10%;
@@ -62,20 +59,16 @@ canvas {
 @keyframes resizeAnimation {
     0% {
         font-size: 53px;
-        /* Startgröße */
     }
-
     50% {
         font-size: 55px;
-        /* Zwischengröße */
     }
-
     100% {
         font-size: 53px;
-        /* Endgröße */
     }
 }
 
+/* Game Over - Lost */
 .gameOverLost {
     position: absolute;
     top: 50%;
@@ -100,6 +93,7 @@ canvas {
     width: max-content;
 }
 
+/* Game Over - Won */
 .gameOverWon {
     position: absolute;
     top: 50%;
@@ -132,6 +126,7 @@ canvas {
     text-shadow: 2px 2px #ffffff;
 }
 
+/* Open Menu Button */
 .openMenuButton {
     position: absolute;
     top: 75%;
@@ -144,57 +139,14 @@ canvas {
     width: max-content;
 }
 
-/* .infoSection {
-    width: 150px;
-    height: 480px;
-    background-color: rgba(255, 150, 1, 0.8);
-    position: absolute;
-    left: -150px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 24px;
-    padding-bottom: 24px;
-    box-sizing: border-box;
-    font-size: 32px;
-} */
-
-@keyframes slideIn {
-    0% {
-        left: 0px;
-        /* Startposition links außerhalb des sichtbaren Bereichs */
-    }
-
-    100% {
-        left: -150px;
-        /* Endposition, Container sichtbar */
-    }
-}
-
-@keyframes slideOut {
-    0% {
-        left: -150px;
-        /* Startposition, Container sichtbar */
-    }
-
-    100% {
-        left: 0;
-        /* Endposition links außerhalb des sichtbaren Bereichs */
-    }
-}
-
+/* Info Section */
 .infoSection {
     width: 150px;
     height: 480px;
     background-color: rgba(255, 150, 1, 0.8);
     position: absolute;
     left: -150px;
-    /* Container wird links ausgerichtet */
     top: 50%;
-    /* Vertikal zentriert */
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
@@ -204,10 +156,6 @@ canvas {
     box-sizing: border-box;
     font-size: 24px;
     z-index: -1;
-    animation-duration: 0.5s;
-    /* Dauer der Animation */
-    animation-fill-mode: forwards;
-    /* Endzustand beibehalten */
 }
 
 .slide-in {
@@ -218,6 +166,7 @@ canvas {
     animation-name: slideOut;
 }
 
+/* Info Container */
 .infoContainer {
     display: flex;
     flex-direction: column;
@@ -236,12 +185,12 @@ canvas {
     text-shadow: 2px 2px #ffffff;
 }
 
+/* Display None */
 .d-none {
     display: none !important;
 }
 
-/* *****************FAQ***************** */
-
+/* FAQ Button */
 .faqButton {
     position: absolute;
     top: 23%;
@@ -258,6 +207,7 @@ canvas {
     color: #971217;
 }
 
+/* Body FAQ */
 .bodyFaq {
     padding: 8px 24px 8px 24px;
 }
@@ -277,14 +227,11 @@ canvas {
     font-size: 24px;
 }
 
-
-/* *****************Privacy And Lega Notice***************** */
-
+/* Privacy and Legal Notice Container */
 .privacyAndLecagNoticeContainer {
     display: flex;
     gap: 16px;
     margin-top: 24px;
-    min-height: 100vh;
 }
 
 .privacyAndLegalNoticeLink {
@@ -292,54 +239,46 @@ canvas {
     color: black;
 }
 
+/* Body Privacy and Legal Notice */
 .bodyPrivacyAndLegalNotice {
     padding: 8px 24px 8px 24px;
+    min-height: 100vh;
 }
 
+/* Heading Container */
 .headingContainer {
     display: flex;
     justify-content: space-between;
 }
 
+/* Mobile Buttons Section */
 .mobielButtonsSection {
     display: none;
 }
 
-
-/* *****************Smartphones***************** */
-
+/* Media Queries for Smartphones */
 @media only screen and (max-width: 720px) {
-
     .mainHeading {
         display: none;
     }
-
     canvas {
         height: 100vh;
         width: 100%;
     }
-
     .privacyAndLegalNoticeLink {
         display: none;
     }
-
     .overlayLostGameImg {
         width: 100vw;
         height: 100vh;
     }
-
     .gameOverWon {
         width: 100%;
         height: 100%;
     }
-
     .privacyAndLecagNoticeContainer {
         display: none;
     }
-
-
-
-
     .mobielButtonsSection {
         display: flex;
         align-items: flex-end;
@@ -351,54 +290,41 @@ canvas {
         bottom: 4px;
         z-index: 999;
     }
-    
     .mobielButtons {
         width: 62px;
         height: 62px;
     }
-    
     .gap32 {
         display: flex;
         gap: 32px;
     }
-
 }
 
 @media only screen and (max-height: 480px) {
-
     .mainHeading {
         display: none;
     }
-
     body {
         display: block;
     }
-
     canvas {
         height: 100vh;
         width: 100%;
     }
-
     .privacyAndLegalNoticeLink {
         display: none;
     }
-
     .overlayLostGameImg {
         width: 100vw;
         height: 100vh;
     }
-
     .gameOverWon {
         width: 100%;
         height: 100%;
     }
-
     .privacyAndLecagNoticeContainer {
         display: none;
     }
-
-
-
     .mobielButtonsSection {
         display: flex;
         align-items: flex-end;
@@ -410,17 +336,14 @@ canvas {
         bottom: 4px;
         z-index: 999;
     }
-    
     .mobielButtons {
         width: 62px;
         height: 62px;
     }
-    
     .gap32 {
         display: flex;
         gap: 32px;
     }
-
 }
 
 @media only screen and (orientation: portrait) {
@@ -441,7 +364,6 @@ canvas {
         font-size: 44px;
         text-align: center;
     }
-
 }
 
 @media only screen and (orientation: landscape) {
