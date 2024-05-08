@@ -45,7 +45,7 @@ class MovableObject extends DrawableObject {
         ctx.save();
         ctx.scale(-1, 1);
         ctx.drawImage(mo.img, -mo.x - mo.width, mo.y, mo.width, mo.height);
-        this.drawFrame(-mo.x - mo.width, mo.y, mo.width, mo.height, ctx);
+        // this.drawFrame(-mo.x - mo.width, mo.y, mo.width, mo.height, ctx);
         ctx.restore();
     }
 

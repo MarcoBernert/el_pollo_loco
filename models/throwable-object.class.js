@@ -2,7 +2,6 @@ class ThrowableObject extends MovableObject {
     speedY = 30;
     speedX = 20;
     bottleSplash = false;
-    throw_sound = new Audio('audio/throw.mp3');
     splash_sound = new Audio('audio/splash_glass.mp3')
     world;
 
@@ -62,7 +61,6 @@ class ThrowableObject extends MovableObject {
         this.rotationInterval = setInterval(() => {
             if (!this.bottleSplash) {
                 this.playAnimation(this.IMAGES_ROTATION);
-                this.world.playAudio(this.throw_sound);
             }
         }, 60);
     

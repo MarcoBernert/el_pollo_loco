@@ -16,7 +16,8 @@ class World {
     bottle;
     audioOn = true;
     background_sound = new Audio('audio/music.mp3');
-    buying_bottle_sound = new Audio('audio/buying_bottle2.mp3')
+    buying_bottle_sound = new Audio('audio/buying_bottle2.mp3');
+    throw_sound = new Audio('audio/throw.mp3');
     durationSound;
     
 
@@ -146,6 +147,7 @@ class World {
             this.throwableObject.push(this.bottle);
             this.character.bottles -= 20;
             this.statusbarBottles.setPercentage(this.character.bottles);
+            this.playAudio(this.throw_sound);
         }
     }
 
