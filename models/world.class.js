@@ -7,6 +7,7 @@ class World {
     info;
     setAudio;
     fullScreen;
+    fullscreenOn = false;
     throwableObject = [];
     level = level1;
     ctx;
@@ -19,7 +20,8 @@ class World {
     buying_bottle_sound = new Audio('audio/buying_bottle2.mp3');
     throw_sound = new Audio('audio/throw.mp3');
     durationSound;
-    
+
+
 
     /**
      * Initializes the game world.
@@ -57,7 +59,7 @@ class World {
     /**
     * Starts playing the music at a regular interval based on its duration.
     */
-    startMusic(){
+    startMusic() {
         setInterval(() => {
             this.playAudio(this.background_sound)
         }, this.durationSound);
@@ -77,7 +79,7 @@ class World {
                     this.playAudio(this.buying_bottle_sound)
                 }
             }
-        }, 100 );
+        }, 100);
     }
 
     /**
@@ -87,7 +89,7 @@ class World {
         this.info = new Info(this.canvas);
         this.setAudio = new SetAudio(this.canvas);
         this.fullScreen = new FullScreen(this.canvas);
-    }  
+    }
 
     /**
      * Plays audio if audio is enabled.
@@ -111,7 +113,7 @@ class World {
         this.fullScreen.world = this;
 
         setInterval(() => {
-            if(this.bottle){
+            if (this.bottle) {
                 this.bottle.world = this;
             }
         }, 100);
@@ -134,7 +136,8 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 200);
+            this.checkLeavingFullscreen();
+        }, 100);
     }
 
     /**
@@ -156,15 +159,26 @@ class World {
      */
     checkCollisions() {
         this.destroyEnemiesWithJump();
-        this.destroyEnemiesWithBottle(); 
-        this.collectCoins();      
+        this.destroyEnemiesWithBottle();
+        this.collectCoins();
         this.collectBottles();
+    }
+
+    /**
+    * Checks for leaving fullscreen mode.
+    */
+    checkLeavingFullscreen() {
+        if (!document.fullscreenElement) {
+            this.fullscreenOn = false;
+        } else if (document.fullscreenElement) {
+            this.fullscreenOn = true;
+        }
     }
 
     /**
      * Destroys enemies upon collision with the main character's jump.
      */
-    destroyEnemiesWithJump(){
+    destroyEnemiesWithJump() {
         this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
                 if (!this.character.isCollidingFromTop) {
@@ -183,11 +197,11 @@ class World {
             }
         });
     }
-    
+
     /**
      * Destroys enemies upon collision with a throwable object (bottle).
      */
-    destroyEnemiesWithBottle(){
+    destroyEnemiesWithBottle() {
         this.level.enemies.forEach((enemy, index) => {
             let lastBottle = this.throwableObject.length;
             let bottleIndex = lastBottle - 1;
@@ -214,7 +228,7 @@ class World {
     /**
      * Collects coins upon collision with the main character.
      */
-    collectCoins(){
+    collectCoins() {
         this.level.coinObjects.forEach((coin, index) => {
             if (this.character.isColliding(coin)) {
                 this.character.collectCoins();
@@ -228,7 +242,7 @@ class World {
     /**
      * Collects bottles upon collision with the main character.
      */
-    collectBottles(){
+    collectBottles() {
         this.level.bottles.forEach((bottle, index) => {
             if (this.character.isColliding(bottle)) {
                 this.character.collectBottles();
@@ -278,7 +292,11 @@ class World {
         this.addToMap(this.statusbarEndboss);
         this.addToMap(this.info);
         this.addToMap(this.setAudio);
-        this.addToMap(this.fullScreen);
+
+        if(!this.fullscreenOn && window.innerWidth >= 720) {
+            this.addToMap(this.fullScreen);
+        }
+        
 
         requestAnimationFrame(this.draw.bind(this));
     }

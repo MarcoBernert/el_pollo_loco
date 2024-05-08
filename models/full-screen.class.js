@@ -15,10 +15,9 @@ class FullScreen extends MovableObject {
         super();
         this.canvas = canvas;
         this.loadImage(`img/10_settings/fullscreen.svg`);
-        this.canvas.addEventListener('click', () => this.handleClick()); // Nach Mausklick Funktion ausführen
+        this.canvas.addEventListener('click', () => this.handleClick());
     }
-
-    
+   
     /**
      * Checks if the mouse is over the button.
      * @param {number} mouseX - The x-coordinate of the mouse cursor.
@@ -34,28 +33,8 @@ class FullScreen extends MovableObject {
      */
     handleClick() {
         if (this.isMouseOverButton(event.offsetX, event.offsetY)) {
-            this.enterFullscreen(this.canvas);
-            console.log('click fullscreen');
-            this.fullscreenOn = true;
-        }
-    }
-
-    /**
-     * Requests full screen mode for the canvas.
-     */
-    enterFullscreen() {
-        this.canvas.requestFullscreen();
-    }
-
-    /**
-     * Exits full screen mode.
-     */
-    exitFullscreen() {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
+            this.canvas.requestFullscreen();
+            world.fullscreenOn = true;
         }
     }
 }
-
