@@ -23,7 +23,7 @@ class MovableObject extends DrawableObject {
             } else {
                 this.y = 170
             }
-        }, 1000/65);
+        }, 1000 / 65);
     }
 
     /**
@@ -85,7 +85,7 @@ class MovableObject extends DrawableObject {
      */
     hit() {
         this.energy -= 5;
-        if (this.energy < 0) {
+        if (this.energy <= 0) {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
@@ -96,7 +96,7 @@ class MovableObject extends DrawableObject {
      * Reduces the energy of the object after hitting an enemy.
      */
     hitEnemy() {
-        this.energy -= 10;
+        this.energy -= 5;
         if (this.energy < 0) {
             this.energy = 0;
         } else {

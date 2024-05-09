@@ -1,8 +1,7 @@
 class ThrowableObject extends MovableObject {
     speedY = 10;
-    speedX = 200;
     bottleSplash = false;
-    splash_sound = new Audio('audio/splash_glass.mp3')
+    splash_sound = new Audio('audio/splash_glass.mp3');
     world;
 
     IMAGES_ROTATION = [
@@ -57,7 +56,6 @@ class ThrowableObject extends MovableObject {
      * Animates the throwable object.
      */
     animate() {
-        // Speichern Sie die Intervall-IDs in Variablen
         this.rotationInterval = setInterval(() => {
             if (!this.bottleSplash) {
                 this.playAnimation(this.IMAGES_ROTATION);
@@ -67,7 +65,7 @@ class ThrowableObject extends MovableObject {
         this.splashInterval = setInterval(() => {
             if (this.bottleSplash || this.y > 340) {
                 this.playAnimation(this.IMAGES_SPLASH);
-                this.world.playAudio(this.splash_sound);
+                // this.world.playAudio(this.world.splash_sound);
                 this.stopAnimation();
             }
         }, 60);

@@ -19,7 +19,9 @@ class World {
     background_sound = new Audio('audio/music.mp3');
     buying_bottle_sound = new Audio('audio/buying_bottle2.mp3');
     throw_sound = new Audio('audio/throw.mp3');
+    splash_sound = new Audio('audio/splash_glass.mp3');
     durationSound;
+    isThrowing = false;
 
 
 
@@ -35,11 +37,11 @@ class World {
         this.setIcons();
         this.draw();
         this.setWorld();
-        this.checkCollisions();
         this.checkIfEnemyIsDead();
         this.run();
         this.exchangeCoinsForBottles();
         this.checkDurationMusic()
+        // this.playAudio(this.splash_sound);
     }
 
     /**
@@ -138,7 +140,7 @@ class World {
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkLeavingFullscreen();
-        }, 100);
+        }, 1000 / 65);
     }
 
     /**
@@ -146,12 +148,16 @@ class World {
      */
     checkThrowObjects() {
         let bottlesAvailable = this.character.bottles > 0;
-        if (this.keyboard.D && bottlesAvailable) {
+        if (this.keyboard.D && bottlesAvailable && !this.isThrowing) {
+            this.isThrowing = true
             this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObject.push(this.bottle);
             this.character.bottles -= 20;
             this.statusbarBottles.setPercentage(this.character.bottles);
             this.playAudio(this.throw_sound);
+            setTimeout(() => {
+                this.isThrowing = false;
+            }, 500);
         }
     }
 
@@ -180,20 +186,17 @@ class World {
      * Destroys enemies upon collision with the main character's jump.
      */
     destroyEnemiesWithJump() {
-        this.level.enemies.forEach((enemy, index) => {
+        this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                if (!this.character.isCollidingFromTop) {
+                if (!this.character.isCollidingFromTop && enemy.energy > 0) {
                     this.character.hit();
                     this.statusbarEnergy.setPercentage(this.character.energy);
                 } else if (this.character.isCollidingFromTop) {
-                    this.character.automaticJumpAfterHitEnemy();
+                    if (enemy.energy > 0) {
+                        this.character.automaticJumpAfterHitEnemy();
+                    }
                     enemy.hitEnemy();
                     this.character.isCollidingFromTop = false;
-                    if (enemy.energy <= 0) {
-                        setTimeout(() => {
-                            this.level.enemies.splice(index, 1);
-                        }, 300);
-                    }
                 }
             }
         });
@@ -203,25 +206,18 @@ class World {
      * Destroys enemies upon collision with a throwable object (bottle).
      */
     destroyEnemiesWithBottle() {
-        this.level.enemies.forEach((enemy, index) => {
+        this.level.enemies.forEach((enemy) => {
             let lastBottle = this.throwableObject.length;
             let bottleIndex = lastBottle - 1;
             if (lastBottle > 0 && this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
                 enemy.hitEnemy();
                 this.throwableObject[bottleIndex].bottleSplash = true;
-                setTimeout(() => {
-                    this.throwableObject.splice((bottleIndex), 1);
-                }, 300);
-                if (enemy.energy <= 0) {
-                    setTimeout(() => {
-                        this.level.enemies.splice(index, 1);
-                    }, 300);
-                }
                 let endBossIndex = this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
                 if (endBossIndex !== -1) {
                     enemy.isHurt = true;
                     this.statusbarEndboss.setPercentage(enemy.energy)
                 }
+                
             }
         });
     }
@@ -261,12 +257,10 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy, index) => {
                 if (enemy.energy <= 0) {
-                    setTimeout(() => {
-                        this.level.enemies.splice(index, 1);
-                    }, 300);
+                    this.level.enemies.splice(index, 1);
                 }
             });
-        }, 1000);
+        }, 2000);
     }
 
     /**
@@ -291,12 +285,12 @@ class World {
         this.addToMap(this.statusbarCoins);
         this.addToMap(this.statusbarBottles);
         this.addToMap(this.statusbarEndboss);
-        if(!this.fullscreenOn && window.innerWidth >= 870 && window.innerHeight >= 480) {
+        if (!this.fullscreenOn && window.innerWidth >= 870 && window.innerHeight >= 480) {
             this.addToMap(this.setAudio);
             this.addToMap(this.info);
             this.addToMap(this.fullScreen);
         }
-    
+
         requestAnimationFrame(this.draw.bind(this));
     }
 
