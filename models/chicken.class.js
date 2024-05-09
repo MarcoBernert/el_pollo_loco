@@ -1,7 +1,7 @@
 class Chicken extends MovableObject {
-    y = 320;
-    width = 100;
-    height = 100;
+    y = 337;
+    width = 80;
+    height = 80;
     energy = 5;
     world;
     audioPlayed = false;

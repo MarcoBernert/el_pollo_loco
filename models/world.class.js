@@ -111,6 +111,7 @@ class World {
         this.info.world = this;
         this.setAudio.world = this;
         this.fullScreen.world = this;
+        this.info.world = this;
 
         setInterval(() => {
             if (this.bottle) {
@@ -290,14 +291,12 @@ class World {
         this.addToMap(this.statusbarCoins);
         this.addToMap(this.statusbarBottles);
         this.addToMap(this.statusbarEndboss);
-        this.addToMap(this.info);
-        this.addToMap(this.setAudio);
-
-        if(!this.fullscreenOn && window.innerWidth >= 720) {
+        if(!this.fullscreenOn && window.innerWidth >= 870 && window.innerHeight >= 480) {
+            this.addToMap(this.setAudio);
+            this.addToMap(this.info);
             this.addToMap(this.fullScreen);
         }
-        
-
+    
         requestAnimationFrame(this.draw.bind(this));
     }
 

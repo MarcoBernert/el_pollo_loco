@@ -4,6 +4,7 @@ class Info extends MovableObject {
     x = 200;
     y = 101;
     canvas;
+    world;
     infoOn = false; // Zustand für Info-Anzeige
     infoOnImage = 'img/10_settings/info-on.svg';
     infoOffImage = 'img/10_settings/info-off.svg';
@@ -24,8 +25,8 @@ class Info extends MovableObject {
      * @param {MouseEvent} event - The mouse click event.
      */
     handleClick(event) {
-        var mouseX = event.clientX - this.canvas.getBoundingClientRect().left;
-        var mouseY = event.clientY - this.canvas.getBoundingClientRect().top;
+        let mouseX = event.clientX - this.canvas.getBoundingClientRect().left;
+        let mouseY = event.clientY - this.canvas.getBoundingClientRect().top;
         if (this.isMouseOverButton(mouseX, mouseY)) {
             this.toggleInfo();
         }

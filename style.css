@@ -17,6 +17,7 @@ body {
     font-family: 'Zabars';
     color: bisque;
     margin: 0;
+    min-height: 100vh;
 }
 
 /* Heading */
@@ -261,24 +262,30 @@ canvas {
     .mainHeading {
         display: none;
     }
+
     canvas {
         height: 100vh;
         width: 100%;
     }
+
     .privacyAndLegalNoticeLink {
         display: none;
     }
+
     .overlayLostGameImg {
         width: 100vw;
         height: 100vh;
     }
+
     .gameOverWon {
         width: 100%;
         height: 100%;
     }
+
     .privacyAndLecagNoticeContainer {
         display: none;
     }
+
     .mobielButtonsSection {
         display: flex;
         align-items: flex-end;
@@ -290,10 +297,16 @@ canvas {
         bottom: 4px;
         z-index: 999;
     }
+
     .mobielButtons {
         width: 62px;
         height: 62px;
     }
+
+    .infoSection {
+        display: none;
+    }
+
     .gap32 {
         display: flex;
         gap: 32px;
@@ -304,27 +317,34 @@ canvas {
     .mainHeading {
         display: none;
     }
+
     body {
         display: block;
     }
+
     canvas {
         height: 100vh;
         width: 100%;
     }
+
     .privacyAndLegalNoticeLink {
         display: none;
     }
+
     .overlayLostGameImg {
         width: 100vw;
         height: 100vh;
     }
+
     .gameOverWon {
         width: 100%;
         height: 100%;
     }
+
     .privacyAndLecagNoticeContainer {
         display: none;
     }
+
     .mobielButtonsSection {
         display: flex;
         align-items: flex-end;
@@ -336,10 +356,16 @@ canvas {
         bottom: 4px;
         z-index: 999;
     }
+
     .mobielButtons {
         width: 62px;
         height: 62px;
     }
+
+    .infoSection {
+        display: none;
+    }
+    
     .gap32 {
         display: flex;
         gap: 32px;
