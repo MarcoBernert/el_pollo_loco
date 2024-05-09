@@ -65,7 +65,7 @@ class ThrowableObject extends MovableObject {
         this.splashInterval = setInterval(() => {
             if (this.bottleSplash || this.y > 340) {
                 this.playAnimation(this.IMAGES_SPLASH);
-                // this.world.playAudio(this.world.splash_sound);
+                this.world.playAudio(this.world.splash_sound);
                 this.stopAnimation();
             }
         }, 60);

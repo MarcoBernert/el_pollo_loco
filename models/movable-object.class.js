@@ -11,6 +11,7 @@ class MovableObject extends DrawableObject {
     isCollidingFromTop = false;
     audioOn = true;
     fullscreenOn = false;
+    hitting = false
 
     /**
      * Applies gravity to the object, making it fall if not supported by a surface.
@@ -84,23 +85,17 @@ class MovableObject extends DrawableObject {
      * Reduces the energy of the object after being hit.
      */
     hit() {
-        this.energy -= 5;
-        if (this.energy <= 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
-        }
-    }
-
-    /**
-     * Reduces the energy of the object after hitting an enemy.
-     */
-    hitEnemy() {
-        this.energy -= 5;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+        if (!this.hitting) {
+            this.hitting = true;
+            this.energy -= 20;
+            if (this.energy <= 0) {
+                this.energy = 0;
+            } else {
+                this.lastHit = new Date().getTime();
+            }
+            setTimeout(() => {
+                this.hitting = false;
+            }, 750);
         }
     }
 

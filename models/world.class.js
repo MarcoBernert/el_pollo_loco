@@ -1,5 +1,12 @@
 class World {
+    canvas;
+    ctx;
+    keyboard;
+
     character = new Character();
+    level = level1;
+    throwableObject = [];
+    bottle;
     statusbarEnergy = new StatusbarEnergy();
     statusbarCoins = new StatusbarCoins();
     statusbarBottles = new StatusbarBottles();
@@ -7,23 +14,17 @@ class World {
     info;
     setAudio;
     fullScreen;
-    fullscreenOn = false;
-    throwableObject = [];
-    level = level1;
-    ctx;
-    canvas;
-    keyboard;
+
     camera_x = 0;
-    bottle;
+    fullscreenOn = false;
     audioOn = true;
+    isThrowing = false;
+
     background_sound = new Audio('audio/music.mp3');
     buying_bottle_sound = new Audio('audio/buying_bottle2.mp3');
     throw_sound = new Audio('audio/throw.mp3');
     splash_sound = new Audio('audio/splash_glass.mp3');
     durationSound;
-    isThrowing = false;
-
-
 
     /**
      * Initializes the game world.
@@ -195,7 +196,7 @@ class World {
                     if (enemy.energy > 0) {
                         this.character.automaticJumpAfterHitEnemy();
                     }
-                    enemy.hitEnemy();
+                    enemy.hit();
                     this.character.isCollidingFromTop = false;
                 }
             }
@@ -210,12 +211,13 @@ class World {
             let lastBottle = this.throwableObject.length;
             let bottleIndex = lastBottle - 1;
             if (lastBottle > 0 && this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
-                enemy.hitEnemy();
+                enemy.hit();
                 this.throwableObject[bottleIndex].bottleSplash = true;
                 let endBossIndex = this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
                 if (endBossIndex !== -1) {
                     enemy.isHurt = true;
                     this.statusbarEndboss.setPercentage(enemy.energy)
+                    console.log(enemy.energy)
                 }
                 
             }
