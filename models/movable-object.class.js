@@ -2,7 +2,7 @@ class MovableObject extends DrawableObject {
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
-    acceleration = 0.03;
+    acceleration = 0.5;
     energy = 100;
     coins = 0;
     bottles = 0;
@@ -20,8 +20,10 @@ class MovableObject extends DrawableObject {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY
                 this.speedY -= this.acceleration;
+            } else {
+                this.y = 170
             }
-        }, 1);
+        }, 1000/65);
     }
 
     /**
@@ -170,13 +172,13 @@ class MovableObject extends DrawableObject {
      * Initiates a jump action for the object.
      */
     jump() {
-        this.speedY = 3;
+        this.speedY = 12;
     }
 
     /**
      * Initiates an automatic jump action after hitting an enemy.
      */
     automaticJumpAfterHitEnemy() {
-        this.speedY = 3;
+        this.speedY = 12;
     }
 }

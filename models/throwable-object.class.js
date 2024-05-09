@@ -1,6 +1,6 @@
 class ThrowableObject extends MovableObject {
-    speedY = 30;
-    speedX = 20;
+    speedY = 10;
+    speedX = 200;
     bottleSplash = false;
     splash_sound = new Audio('audio/splash_glass.mp3')
     world;
@@ -41,7 +41,7 @@ class ThrowableObject extends MovableObject {
      * Throws the throwable object.
      */
     throw() {
-        this.speedY = 3;
+        // this.speedY = 12;
         this.applyGravity();
         setInterval(() => {
             if (this.isAboveGround) {
