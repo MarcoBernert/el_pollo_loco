@@ -26,9 +26,9 @@ function home() {
  * Loads the start screen background onto the canvas.
  */
 function loadStartScreen() {
-  canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_1.png")';
-  canvas.style.backgroundSize = 'cover';
-  canvas.style.backgroundPosition = 'center';
+  // canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_1.png")';
+  // canvas.style.backgroundSize = 'cover';
+  // canvas.style.backgroundPosition = 'center';
 }
 
 /**
@@ -37,12 +37,15 @@ function loadStartScreen() {
 function startGame() {
   initLevel1();
   world = new World(canvas, keyboard);
-  document.getElementById('startButton').classList.add('d-none');
-  document.getElementById('faqButton').classList.add('d-none');
-  document.getElementById('overlayLostGame').classList.add('d-none');
-  document.getElementById('overlayWonGame').classList.add('d-none');
-  document.getElementById('mobileButtonsSection').classList.remove('d-none');
-  document.getElementById('settingsSection').classList.remove('d-none');
+  setTimeout(() => {
+    document.getElementById('startscreen').classList.add('d-none');
+    document.getElementById('startButton').classList.add('d-none');
+    document.getElementById('faqButton').classList.add('d-none');
+    document.getElementById('overlayLostGame').classList.add('d-none');
+    document.getElementById('overlayWonGame').classList.add('d-none');
+    document.getElementById('mobileButtonsSection').classList.remove('d-none');
+    document.getElementById('settingsSection').classList.remove('d-none');
+  }, 200);
   checkIfGameIsOver();
 }
 

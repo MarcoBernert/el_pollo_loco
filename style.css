@@ -41,6 +41,16 @@ canvas {
     background-color: black;
 }
 
+/* Startscreen */
+.startscreen {
+    width: 720px;
+    height: 480px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 /* Start Button */
 .startButton {
     position: absolute;
