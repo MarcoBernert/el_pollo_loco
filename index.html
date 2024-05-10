@@ -21,9 +21,6 @@
     <script src="models/statusbar-bottles.class.js"></script>
     <script src="models/statusbar-endboss.class.js"></script>
     <script src="models/throwable-object.class.js"></script>
-    <script src="models/info.class.js"></script>
-    <script src="models/set-audio.class.js"></script>
-    <script src="models/full-screen.class.js"></script>
     <script src="models/world.class.js"></script>
     <script src="models/keyboard.class.js"></script>
     <script src="models/level.class.js"></script>
@@ -61,9 +58,16 @@
         <canvas id="canvas" width="720" height="480"></canvas>
         <div id="startButton" class="startButton" onclick="startGame()">START GAME</div>
         <a id="faqButton" href="faq.html" class="faqButton">FAQ</a>
+        
+        <div id="settingsSection" class="settingsSection d-none">
+            <img id="audioIcon" class="settingIcon" src="img/10_settings/audio-on.svg" alt="audio icon" onclick="toggleAudio()">
+            <img id="fullscreenIcon" class="settingIcon" src="img/10_settings/fullscreen.svg" alt="fullscreen icon" onclick="openFullscreen()">
+            <img id="infoIcon" class="settingIcon" src="img/10_settings/info-off.svg" alt="info icon" onclick="toggleInfo()">
+        </div>
+        
         <div id="overlayLostGame" class="gameOverLost d-none">
             <div id="restartButtonLost" class="restartButtonLost" onclick="startGame()">TRY AGAIN</div>
-            <img class="overlayLostGameImg" src="img/9_intro_outro_screens/game_over/game over!.png" alt="">
+            <img class="overlayLostGameImg" src="img/9_intro_outro_screens/game_over/game over!.png" alt="overlay lost">
             <div id="openMenuButton" class="openMenuButton" onclick="home()">MENU</div>
         </div>
         <div id="overlayWonGame" class="gameOverWon d-none">
@@ -73,7 +77,7 @@
             </div>
             <div id="openMenuButton" class="openMenuButton" onclick="home()">MENU</div>
         </div>
-        <div class="mobielButtonsSection d-none" id="mobielButtonsSection">
+        <div class="mobileButtonsSection d-none" id="mobileButtonsSection">
             <div class="gap32">
                 <img id="btnLeft" class="mobielButtons" src="img/13_mobile_buttons/left-button.svg" alt="left button">
                 <img id="btnRight" class="mobielButtons" src="img/13_mobile_buttons/right-button.svg"

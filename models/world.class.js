@@ -11,12 +11,8 @@ class World {
     statusbarCoins = new StatusbarCoins();
     statusbarBottles = new StatusbarBottles();
     statusbarEndboss = new StatusbarEndboss();
-    info;
-    setAudio;
-    fullScreen;
 
     camera_x = 0;
-    fullscreenOn = false;
     audioOn = true;
     isThrowing = false;
 
@@ -35,14 +31,12 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.setIcons();
         this.draw();
         this.setWorld();
         this.checkIfEnemyIsDead();
         this.run();
         this.exchangeCoinsForBottles();
-        this.checkDurationMusic()
-        // this.playAudio(this.splash_sound);
+        this.checkDurationMusic();
     }
 
     /**
@@ -86,15 +80,6 @@ class World {
     }
 
     /**
-     * Sets up icons for information, audio, and full screen.
-     */
-    setIcons() {
-        this.info = new Info(this.canvas);
-        this.setAudio = new SetAudio(this.canvas);
-        this.fullScreen = new FullScreen(this.canvas);
-    }
-
-    /**
      * Plays audio if audio is enabled.
      * @param {HTMLAudioElement} audio - The audio element to play.
      */
@@ -111,22 +96,15 @@ class World {
      */
     setWorld() {
         this.character.world = this;
-        this.info.world = this;
-        this.setAudio.world = this;
-        this.fullScreen.world = this;
-        this.info.world = this;
 
         setInterval(() => {
             if (this.bottle) {
                 this.bottle.world = this;
             }
         }, 100);
-
         this.level.enemies.forEach(enemy => {
             enemy.world = this;
         });
-
-
         let endBossIndex = this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
         if (endBossIndex !== -1) {
             this.level.enemies[endBossIndex].world = this;
@@ -140,7 +118,6 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-            this.checkLeavingFullscreen();
         }, 1000 / 65);
     }
 
@@ -170,17 +147,6 @@ class World {
         this.destroyEnemiesWithBottle();
         this.collectCoins();
         this.collectBottles();
-    }
-
-    /**
-    * Checks for leaving fullscreen mode.
-    */
-    checkLeavingFullscreen() {
-        if (!document.fullscreenElement) {
-            this.fullscreenOn = false;
-        } else if (document.fullscreenElement) {
-            this.fullscreenOn = true;
-        }
     }
 
     /**
@@ -287,11 +253,6 @@ class World {
         this.addToMap(this.statusbarCoins);
         this.addToMap(this.statusbarBottles);
         this.addToMap(this.statusbarEndboss);
-        if (!this.fullscreenOn && window.innerWidth >= 870 && window.innerHeight >= 480) {
-            this.addToMap(this.setAudio);
-            this.addToMap(this.info);
-            this.addToMap(this.fullScreen);
-        }
 
         requestAnimationFrame(this.draw.bind(this));
     }
