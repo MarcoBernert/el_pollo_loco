@@ -297,6 +297,11 @@ canvas {
         width: 100%;
     }
 
+    .startscreen {
+        width: 100vw;
+        height: 100vh;
+    }
+
     .privacyAndLegalNoticeLink {
         display: none;
     }
@@ -345,6 +350,7 @@ canvas {
         display: none;
     }
 
+
     .gap32 {
         display: flex;
         gap: 32px;
@@ -363,6 +369,11 @@ canvas {
     canvas {
         height: 100vh;
         width: 100%;
+    }
+
+    .startscreen {
+        width: 100vw;
+        height: 100vh;
     }
 
     .privacyAndLegalNoticeLink {
