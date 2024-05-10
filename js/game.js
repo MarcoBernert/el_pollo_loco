@@ -11,7 +11,6 @@ let lost_sound = new Audio('audio/lost1.mp3')
  */
 function init() {
   canvas = document.getElementById('canvas');
-  loadStartScreen();
   touchEvents();
 }
 
@@ -20,15 +19,6 @@ function init() {
  */
 function home() {
   location.reload();
-}
-
-/**
- * Loads the start screen background onto the canvas.
- */
-function loadStartScreen() {
-  // canvas.style.backgroundImage = 'url("img/9_intro_outro_screens/start/startscreen_1.png")';
-  // canvas.style.backgroundSize = 'cover';
-  // canvas.style.backgroundPosition = 'center';
 }
 
 /**
