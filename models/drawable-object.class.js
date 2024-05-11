@@ -24,7 +24,7 @@ class DrawableObject {
     drawImageNormal(mo, ctx) {
         // try {
             ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-            // this.drawFrame(mo.x, mo.y, mo.width, mo.height, ctx);
+            this.drawFrame(mo.x, mo.y, mo.width, mo.height, ctx);
 
         // } catch (e) {
         //     console.log('error', e);
@@ -44,13 +44,13 @@ class DrawableObject {
         });
     }
 
-    // drawFrame(x, y, width, height, ctx) {
-    //     if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
-    //         ctx.beginPath();
-    //         ctx.lineWidth = '6';
-    //         ctx.strokeStyle = 'red';
-    //         ctx.rect(x, y, width, height);
-    //         ctx.stroke();
-    //     }
-    // }
+    drawFrame(x, y, width, height, ctx) {
+        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss) {
+            ctx.beginPath();
+            ctx.lineWidth = '6';
+            ctx.strokeStyle = 'red';
+            ctx.rect(x, y, width, height);
+            ctx.stroke();
+        }
+    }
 }

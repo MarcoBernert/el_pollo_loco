@@ -56,16 +56,20 @@
             </div>
         </div>
         <canvas id="canvas" width="720" height="480"></canvas>
-        <img id="startscreen" class="startscreen" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="startscreen image">
+        <img id="startscreen" class="startscreen" src="img/9_intro_outro_screens/start/startscreen_1.png"
+            alt="startscreen image">
         <div id="startButton" class="startButton" onclick="startGame()">START GAME</div>
         <a id="faqButton" href="faq.html" class="faqButton">FAQ</a>
-        
+
         <div id="settingsSection" class="settingsSection d-none">
-            <img id="audioIcon" class="settingIcon" src="img/10_settings/audio-on.svg" alt="audio icon" onclick="toggleAudio()">
-            <img id="fullscreenIcon" class="settingIcon" src="img/10_settings/fullscreen.svg" alt="fullscreen icon" onclick="openFullscreen()">
-            <img id="infoIcon" class="settingIcon" src="img/10_settings/info-off.svg" alt="info icon" onclick="toggleInfo()">
+            <img id="audioIcon" class="settingIcon" src="img/10_settings/audio-on.svg" alt="audio icon"
+                onclick="toggleAudio()">
+            <img id="fullscreenIcon" class="settingIcon" src="img/10_settings/fullscreen.svg" alt="fullscreen icon"
+                onclick="openFullscreen()">
+            <img id="infoIcon" class="settingIcon" src="img/10_settings/info-off.svg" alt="info icon"
+                onclick="toggleInfo()">
         </div>
-        
+
         <div id="overlayLostGame" class="gameOverLost d-none">
             <div id="restartButtonLost" class="restartButtonLost" onclick="startGame()">TRY AGAIN</div>
             <img class="overlayLostGameImg" src="img/9_intro_outro_screens/game_over/game over!.png" alt="overlay lost">
@@ -97,7 +101,10 @@
         <a class="privacyAndLegalNoticeLink" href="privacy.html">Privacy Policy</a>
         <a class="privacyAndLegalNoticeLink" href="legal_notice.html">Legal Notice</a>
     </div>
-    <div class="d-none-landscape">ROTATE YOUR PHONE</div>
+    <div class="d-none-landscape">
+        <img class="rotateDeviceIcon" src="img/10_settings/rotate-device.svg" alt="rotate device icon">
+        <div>ROTATE YOUR DEVICE</div>
+    </div>
 </body>
 
 </html>

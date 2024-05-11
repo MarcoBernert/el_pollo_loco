@@ -9,6 +9,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     isCollidingFromSide = false;
     isCollidingFromTop = false;
+
     hitting = false
 
     /**
@@ -46,7 +47,7 @@ class MovableObject extends DrawableObject {
         ctx.save();
         ctx.scale(-1, 1);
         ctx.drawImage(mo.img, -mo.x - mo.width, mo.y, mo.width, mo.height);
-        // this.drawFrame(-mo.x - mo.width, mo.y, mo.width, mo.height, ctx);
+        this.drawFrame(-mo.x - mo.width, mo.y, mo.width, mo.height, ctx);
         ctx.restore();
     }
 
@@ -77,7 +78,7 @@ class MovableObject extends DrawableObject {
             this.isCollidingFromTop = true;
             return !fromLeft || !fromRight;
         }
-    }
+    }  
 
     /**
      * Reduces the energy of the object after being hit.

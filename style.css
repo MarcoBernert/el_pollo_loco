@@ -59,12 +59,12 @@ canvas {
     transform: translate(-50%, -50%);
     cursor: pointer;
     text-shadow: 2px 2px #ffffff;
-    color: red;
+    color: #971217;
     animation: resizeAnimation 1800ms infinite;
 }
 
 .startButton:hover {
-    color: #971217;
+    color: red;
 }
 
 @keyframes resizeAnimation {
@@ -101,9 +101,13 @@ canvas {
     transform: translate(-50%, -50%);
     cursor: pointer;
     text-shadow: 2px 2px #ffffff;
-    color: red;
+    color: #971217;
     animation: resizeAnimation 1800ms infinite;
     width: max-content;
+}
+
+.restartButtonLost:hover {
+    color: red;
 }
 
 /* Settings Section - Audio - Fullscreen - Info */
@@ -164,9 +168,13 @@ canvas {
     transform: translate(-50%, -50%);
     cursor: pointer;
     text-shadow: 2px 2px #ffffff;
-    color: red;
+    color: #971217;
     animation: resizeAnimation 1800ms infinite;
     width: max-content;
+}
+
+.openMenuButton:hover {
+    color: red;
 }
 
 /* Info Section */
@@ -228,13 +236,13 @@ canvas {
     transform: translate(-50%, -50%);
     cursor: pointer;
     text-shadow: 2px 2px #ffffff;
-    color: red;
+    color: #971217;
     text-decoration: none;
     animation: resizeAnimation 1800ms infinite;
 }
 
 .faqButton:hover {
-    color: #971217;
+    color: red;
 }
 
 /* Body FAQ */
@@ -247,7 +255,7 @@ canvas {
 }
 
 .questionsFaq {
-    color: #ed030b;
+    color: #971217;
     font-size: 28px;
     text-shadow: 2px 2px #ffffff;
 }
@@ -443,11 +451,29 @@ canvas {
         min-height: 100vh;
         background-color: red;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         font-size: 44px;
         text-align: center;
+        gap: 16px;
     }
+
+    .rotateDeviceIcon {
+        width: 80px;
+        animation: rotateAnimation 3s linear infinite;
+    }
+
+    @keyframes rotateAnimation {
+        0% {
+            transform: rotate(-45deg);
+        }
+        50% {
+            transform: rotate(45deg);
+        }
+        100% {
+            transform: rotate(-45deg);
+        }
 }
 
 @media only screen and (orientation: landscape) {
