@@ -6,6 +6,12 @@ class Character extends MovableObject {
     world;
     speed = 10;
     lastKeyPressTime;
+    offset = {
+        top: 150,
+        left: 40,
+        right: 40,
+        bottom: 30
+    }
     walking_sound = new Audio('audio/running.mp3')
     jumping_sound = new Audio('audio/jump.mp3')
     hurt_sound = new Audio('audio/ouch.mp3');
@@ -84,6 +90,7 @@ class Character extends MovableObject {
         this.animate();
         this.y = 170;
         this.applyGravity();
+        this.checkIfCollidingFromTop();
     }
 
     /**
@@ -164,7 +171,17 @@ class Character extends MovableObject {
             }
         }, 200);
     }
+
+    /**
+     * Check if character is colliding from top.
+     */
+    checkIfCollidingFromTop() {
+        setInterval(() => {
+            if (this.isAboveGround() && this.speedY < 0) {
+                this.isCollidingFromTop = true;
+            } else {
+                this.isCollidingFromTop = false;
+            }
+        }, 1000 / 65);
+    }
 }
-
-
-

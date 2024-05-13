@@ -176,7 +176,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             let lastBottle = this.throwableObject.length;
             let bottleIndex = lastBottle - 1;
-            if (lastBottle > 0 && this.throwableObject[bottleIndex].isCollidingNormal(enemy)) {
+            if (lastBottle > 0 && this.throwableObject[bottleIndex].isColliding(enemy)) {
                 enemy.hit();
                 this.throwableObject[bottleIndex].bottleSplash = true;
                 let endBossIndex = this.level.enemies.findIndex(enemy => enemy instanceof Endboss);
@@ -185,7 +185,6 @@ class World {
                     this.statusbarEndboss.setPercentage(enemy.energy)
                     console.log(enemy.energy)
                 }
-                
             }
         });
     }

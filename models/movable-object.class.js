@@ -9,8 +9,16 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     isCollidingFromSide = false;
     isCollidingFromTop = false;
+    
 
     hitting = false
+
+    offset = {
+        top: 30,
+        bottom: 30,
+        left: 30,
+        right: 30,
+    }
 
     /**
      * Applies gravity to the object, making it fall if not supported by a surface.
@@ -68,17 +76,25 @@ class MovableObject extends DrawableObject {
      * @param {object} mo - The other movable object.
      * @returns {boolean} - Indicates if the collision occurs.
      */
+    // isColliding(mo) {
+    //     let fromLeft = this.x + this.width >= mo.x && this.x + this.width <= mo.x + mo.width && this.y < mo.y + mo.height && this.y + this.height > mo.y;
+    //     let fromRight = this.x <= mo.x + mo.width && this.x >= mo.x && this.y < mo.y + mo.height && this.y + this.height > mo.y;
+    //     let fromTop = this.y + this.height >= mo.y && this.y + this.height <= mo.y + mo.height && this.x < mo.x + mo.width && this.x + this.width > mo.x;
+    //     if (fromLeft || fromRight) {
+    //         return fromLeft || fromRight;
+    //     } else if (fromTop) {
+    //         this.isCollidingFromTop = true;
+    //         return !fromLeft || !fromRight;
+    //     }
+    // } 
+
+
     isColliding(mo) {
-        let fromLeft = this.x + this.width >= mo.x && this.x + this.width <= mo.x + mo.width && this.y < mo.y + mo.height && this.y + this.height > mo.y;
-        let fromRight = this.x <= mo.x + mo.width && this.x >= mo.x && this.y < mo.y + mo.height && this.y + this.height > mo.y;
-        let fromTop = this.y + this.height >= mo.y && this.y + this.height <= mo.y + mo.height && this.x < mo.x + mo.width && this.x + this.width > mo.x;
-        if (fromLeft || fromRight) {
-            return fromLeft || fromRight;
-        } else if (fromTop) {
-            this.isCollidingFromTop = true;
-            return !fromLeft || !fromRight;
-        }
-    }  
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+        this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+        this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+        this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
+    }
 
     /**
      * Reduces the energy of the object after being hit.

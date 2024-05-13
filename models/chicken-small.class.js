@@ -4,6 +4,12 @@ class ChickenSmall extends MovableObject {
     height = 65;
     energy = 5;
     world;
+    offset = {
+        top: 8,
+        left: 8,
+        right: 8,
+        bottom: 8
+    }
     audioPlayed = false;
     dead_sound = new Audio('audio/chicken_dead.mp3');
 

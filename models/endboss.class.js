@@ -8,6 +8,12 @@ class Endboss extends MovableObject {
     isHurt = false;
     sound = new Audio('audio/chicken.mp3')
     energy = 100;
+    offset = {
+        top: 80,
+        left: 10,
+        right: 10,
+        bottom: 90
+    }
 
     IMAGES_WALK = [
         'img/4_enemie_boss_chicken/1_walk/G1.png',

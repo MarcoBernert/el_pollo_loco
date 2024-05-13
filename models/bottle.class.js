@@ -2,6 +2,12 @@ class Bottle extends MovableObject {
     y = 340;
     width = 80;
     height = 120;
+    offset = {
+        top: 8,
+        left: 25,
+        right: 15,
+        bottom: 8
+    }
 
     /**
      * Constructs a Bottle instance with the provided image path and sets its x-coordinate randomly.
