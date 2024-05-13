@@ -9,8 +9,6 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     isCollidingFromSide = false;
     isCollidingFromTop = false;
-    
-
     hitting = false
 
     offset = {
@@ -55,20 +53,8 @@ class MovableObject extends DrawableObject {
         ctx.save();
         ctx.scale(-1, 1);
         ctx.drawImage(mo.img, -mo.x - mo.width, mo.y, mo.width, mo.height);
-        this.drawFrame(-mo.x - mo.width, mo.y, mo.width, mo.height, ctx);
+        // this.drawFrame(-mo.x - mo.width, mo.y, mo.width, mo.height, ctx);
         ctx.restore();
-    }
-
-    /**
-     * Checks if the object is colliding with another object in a normal manner (not considering falling).
-     * @param {object} mo - The other movable object.
-     * @returns {boolean} - Indicates if the collision occurs.
-     */
-    isCollidingNormal(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x + mo.width &&
-            this.y < mo.y + mo.height;
     }
 
     /**
@@ -76,19 +62,6 @@ class MovableObject extends DrawableObject {
      * @param {object} mo - The other movable object.
      * @returns {boolean} - Indicates if the collision occurs.
      */
-    // isColliding(mo) {
-    //     let fromLeft = this.x + this.width >= mo.x && this.x + this.width <= mo.x + mo.width && this.y < mo.y + mo.height && this.y + this.height > mo.y;
-    //     let fromRight = this.x <= mo.x + mo.width && this.x >= mo.x && this.y < mo.y + mo.height && this.y + this.height > mo.y;
-    //     let fromTop = this.y + this.height >= mo.y && this.y + this.height <= mo.y + mo.height && this.x < mo.x + mo.width && this.x + this.width > mo.x;
-    //     if (fromLeft || fromRight) {
-    //         return fromLeft || fromRight;
-    //     } else if (fromTop) {
-    //         this.isCollidingFromTop = true;
-    //         return !fromLeft || !fromRight;
-    //     }
-    // } 
-
-
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
         this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&

@@ -10,7 +10,7 @@ class Character extends MovableObject {
         top: 150,
         left: 40,
         right: 40,
-        bottom: 30
+        bottom: 10
     }
     walking_sound = new Audio('audio/running.mp3')
     jumping_sound = new Audio('audio/jump.mp3')
